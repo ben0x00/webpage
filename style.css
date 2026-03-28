@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Workbench&display=swap");
 @font-face {
   font-family: "Workbench";
-  src: url("assets/fonts/Workbench.woff2");
+  src: url("assets/fonts/Workbench.ttf");
+  font-family: "VT323";
+  src: url("assets/fonts/VT323.ttf");
 }
 body {
   background-color: #fbfbfb;
