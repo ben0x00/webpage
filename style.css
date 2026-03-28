@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Workbench&display=swap");
+@font-face {
+  font-family: "Workbench";
+  src: url("assets/fonts/Workbench.woff2");
+}
+body {
+  background-color: #fbfbfb;
+  border: solid 2px #002bff;
+}
+
+#app {
+  display: grid;
+  height: 95vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 50px;
+}
+
+#content {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 0.75fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+#content #content-left-pane {
+  grid-column: 1;
+  border: solid 2px #002bff;
+  border-radius: 15px;
+  background-color: #fbfbfb;
+  padding: 15px;
+}
+#content #content-left-pane #content-left-title h1 {
+  font-family: "Workbench", sans-serif;
+  font-size: 3rem;
+  margin: inherit;
+}
+#content #content-left-pane #content-left-title h1 #title-pt1 {
+  color: #0300a8;
+}
+#content #content-right-pane {
+  grid-column: 2;
+  border: solid 2px #0300a8;
+  border-radius: 15px;
+  background-color: #fff8f3;
+  padding: 15px;
+}
+
+#navigation-bar {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+  grid-template-rows: 1fr;
+  border-top: solid 2px #002bff;
+  background-color: #fbfbfb;
+}
+#navigation-bar ul {
+  display: grid;
+  grid-auto-flow: column;
+  list-style-type: none;
+  font-family: "VT323", monospace;
+  color: #002bff;
+}
+#navigation-bar #navigation-links {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+#navigation-bar #navigation-buttons {
+  grid-column: 2;
+  text-align: center;
+  align-self: center;
+  margin: 0;
+}
+
+/*# sourceMappingURL=style.css.map */

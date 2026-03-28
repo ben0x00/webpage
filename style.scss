@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'Workbench';
+  src: url('assets/fonts/Workbench.woff2');
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Workbench&display=swap');
+
+$accent: #002bff;
+$secondary: #0300a8;
+$tertiary: #7c0aff;
+$light: #fbfbfb;
+$lightBG: #fbf7f3;
+$lightCream: #fff8f3;
+$dark: #202022;
+$darkBG: #131240;
+
+$strokeWidth: 2px;
+
+body {
+  background-color: $light;
+  border: solid $strokeWidth $accent;
+}
+
+#app {
+  display: grid;
+  height: 95vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 50px;
+}
+
+#content {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 0.75fr 1fr;
+
+  gap: 10px;
+  padding: 10px;
+
+  #content-left-pane {
+    grid-column: 1;
+
+    border: solid $strokeWidth $accent;
+    border-radius: 15px;
+    background-color: $light;
+
+    padding: 15px;
+
+    #content-left-title h1{
+      font-family: 'Workbench', sans-serif;
+      font-size: 3rem;
+      //color: $accent;
+      margin: inherit;
+
+      #title-pt1 {
+        color: $secondary;
+      }
+    }
+  }
+
+  #content-right-pane {
+    grid-column: 2;
+
+    border: solid $strokeWidth $secondary;
+    border-radius: 15px;
+    background-color: $lightCream;
+
+    padding: 15px;
+  }
+}
+
+#navigation-bar {
+  grid-column: 1;
+  grid-row: 2;
+  //width: 100%;
+
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+  grid-template-rows: 1fr;
+
+
+  //width:
+  border-top: solid $strokeWidth $accent;
+  background-color: $light;
+
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    list-style-type: none;
+
+    font-family: 'VT323', monospace; // add
+    color: $accent;
+  }
+
+  #navigation-links {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  #navigation-buttons {
+    grid-column: 2;
+    text-align: center;
+    align-self: center;
+    margin: 0;
+  }
+}
