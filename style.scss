@@ -1,12 +1,24 @@
 @font-face {
   font-family: 'Workbench';
   src: url('assets/fonts/Workbench.ttf');
+}
 
+$font-variations-workbench: (
+  overexposed: (SCAN: 67, BLED: 0),
+  overlapping: (SCAN: 37, BLED: 0),
+  touching: (SCAN: 21, BLED: 0),
+  close: (SCAN: 0, BLED: 0),
+  evenly: (SCAN: -27, BLED: 0),
+  slight: (SCAN: -45, BLED: 0),
+  delicate: (SCAN: -53, BLED: 0),
+);
+@mixin font-variations-workbench($name) {
+  font-variation-settings: map-get($font-variations-workbench, $name);
+}
+@font-face {
   font-family: 'VT323';
   src: url('assets/fonts/VT323.ttf');
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Workbench&display=swap');
 
 $accent: #002bff;
 $secondary: #0300a8;
@@ -24,24 +36,24 @@ body {
   border: solid $strokeWidth $accent;
 }
 
-#app {
+#div-app {
   display: grid;
   height: 95vh;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 50px;
 }
 
-#content {
+#div-content {
   grid-column: 1;
   grid-row: 1;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 0.75fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
 
   gap: 10px;
   padding: 10px;
 
-  #content-left-pane {
+  #div-content-left-pane {
     grid-column: 1;
 
     border: solid $strokeWidth $accent;
@@ -50,19 +62,26 @@ body {
 
     padding: 15px;
 
-    #content-left-title h1{
-      font-family: 'Workbench', sans-serif;
+    .title {
+      font-family: 'Workbench', monospace;
       font-size: 3rem;
-      //color: $accent;
+      color: $accent;
       margin: inherit;
 
-      #title-pt1 {
-        color: $secondary;
+      .title-pt1{
+        font-variation-settings: 'SCAN' 21, 'BLED' 0; // 'touching'
       }
+      .title-pt2{
+        font-variation-settings: 'SCAN' 0, 'BLED' 0; // 'close'
+      //}
+      .title-pt3{
+        font-variation-settings: 'SCAN' -27, 'BLED' 0; // 'evenly'
+      }
+
     }
   }
 
-  #content-right-pane {
+  #div-content-right-pane {
     grid-column: 2;
 
     border: solid $strokeWidth $secondary;
