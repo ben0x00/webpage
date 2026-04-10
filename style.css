@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Workbench&display=swap");
 @font-face {
   font-family: "Workbench";
   src: url("assets/fonts/Workbench.ttf");
@@ -11,15 +10,13 @@ body {
   background-color: #fbfbfb;
   border: solid 2px #002bff;
 }
-
-#div-app {
+body main {
   display: grid;
   height: 95vh;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 50px;
 }
-
-#div-content {
+body main #div-content {
   grid-column: 1;
   grid-row: 1;
   display: grid;
@@ -28,37 +25,36 @@ body {
   gap: 10px;
   padding: 10px;
 }
-#div-content #div-content-left-pane {
+body main #div-content #div-content-left-pane {
   grid-column: 1;
   border: solid 2px #002bff;
   border-radius: 15px;
   background-color: #fbfbfb;
   padding: 15px;
 }
-#div-content #div-content-left-pane .title {
+body main #div-content #div-content-left-pane .title {
   font-family: "Workbench", monospace;
   font-size: 3rem;
   color: #002bff;
   margin: inherit;
 }
-#div-content #div-content-left-pane .title .title-pt1 {
+body main #div-content #div-content-left-pane .title .title-pt1 {
   font-variation-settings: "SCAN" 21, "BLED" 0;
 }
-#div-content #div-content-left-pane .title .title-pt2 {
+body main #div-content #div-content-left-pane .title .title-pt2 {
   font-variation-settings: "SCAN" 0, "BLED" 0;
 }
-#div-content #div-content-left-pane .title .title-pt3 {
+body main #div-content #div-content-left-pane .title .title-pt3 {
   font-variation-settings: "SCAN" -27, "BLED" 0;
 }
-#div-content #div-content-right-pane {
+body main #div-content #div-content-right-pane {
   grid-column: 2;
   border: solid 2px #0300a8;
   border-radius: 15px;
   background-color: #fff8f3;
   padding: 15px;
 }
-
-#navigation-bar {
+body main #navigation-bar {
   grid-column: 1;
   grid-row: 2;
   display: grid;
@@ -67,19 +63,19 @@ body {
   border-top: solid 2px #002bff;
   background-color: #fbfbfb;
 }
-#navigation-bar ul {
+body main #navigation-bar ul {
   display: grid;
   grid-auto-flow: column;
   list-style-type: none;
   font-family: "VT323", monospace;
   color: #002bff;
 }
-#navigation-bar #navigation-links {
+body main #navigation-bar #navigation-links {
   grid-column: 1;
   grid-row: 1;
   align-self: start;
 }
-#navigation-bar #navigation-buttons {
+body main #navigation-bar #navigation-buttons {
   grid-column: 2;
   text-align: center;
   align-self: center;
