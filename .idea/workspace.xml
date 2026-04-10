@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9602cfdc-afa1-40c3-bab5-fd498ab8d1f9" name="Changes" comment="CSS for left pane + Taggeschrift font." />
+    <list default="true" id="9602cfdc-afa1-40c3-bab5-fd498ab8d1f9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +71,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "code.cleanup.on.save": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "v3-modern",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
     "list.type.of.created.stylesheet": "SCSS",
