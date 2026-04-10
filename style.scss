@@ -20,6 +20,11 @@ $font-variations-workbench: (
   src: url('assets/fonts/VT323.ttf');
 }
 
+@font-face {
+  font-family: 'Tagesschrift';
+  src: url('assets/fonts/Tagesschrift.ttf');
+}
+
 $accent: #002bff;
 $secondary: #0300a8;
 $tertiary: #7c0aff;
@@ -28,6 +33,8 @@ $lightBG: #fbf7f3;
 $lightCream: #fff8f3;
 $dark: #202022;
 $darkBG: #131240;
+
+$text: #202022;
 
 $strokeWidth: 2px;
 
@@ -79,7 +86,18 @@ body {
           .title-pt3 {
             font-variation-settings: 'SCAN' -27, 'BLED' 0; // 'evenly'
           }
+        }
 
+        #div-content-left-description {
+          font-family: 'Tagesschrift', monospace;
+          font-size: 1rem;
+          color: $secondary;
+          margin: inherit;
+        }
+
+        #div-content-left-body {
+          font-family: sans-serif;
+          color: $text;
         }
       }
 

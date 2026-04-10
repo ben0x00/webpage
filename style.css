@@ -6,6 +6,10 @@
   font-family: "VT323";
   src: url("assets/fonts/VT323.ttf");
 }
+@font-face {
+  font-family: "Tagesschrift";
+  src: url("assets/fonts/Tagesschrift.ttf");
+}
 body {
   background-color: #fbfbfb;
   border: solid 2px #002bff;
@@ -46,6 +50,16 @@ body main #div-content #div-content-left-pane .title .title-pt2 {
 }
 body main #div-content #div-content-left-pane .title .title-pt3 {
   font-variation-settings: "SCAN" -27, "BLED" 0;
+}
+body main #div-content #div-content-left-pane #div-content-left-description {
+  font-family: "Tagesschrift", monospace;
+  font-size: 1rem;
+  color: #0300a8;
+  margin: inherit;
+}
+body main #div-content #div-content-left-pane #div-content-left-body {
+  font-family: sans-serif;
+  color: #202022;
 }
 body main #div-content #div-content-right-pane {
   grid-column: 2;
