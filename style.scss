@@ -1,132 +1,338 @@
-@font-face {
-  font-family: 'Workbench';
-  src: url('assets/fonts/Workbench.ttf');
-}
+@use 'sass:map';
+@use 'typography';
 
-$font-variations-workbench: (
-        overexposed: (SCAN: 67, BLED: 0),
-        overlapping: (SCAN: 37, BLED: 0),
-        touching: (SCAN: 21, BLED: 0),
-        close: (SCAN: 0, BLED: 0),
-        evenly: (SCAN: -27, BLED: 0),
-        slight: (SCAN: -45, BLED: 0),
-        delicate: (SCAN: -53, BLED: 0),
+// ===================================
+// LAYER 1: DESIGN TOKENS
+// ===================================
+
+// Colors - Warm cream/tan palette (from Figma design)
+$colors: (
+  bg-main: #faf9f5,                    // Warm cream - main background
+  bg-pane-left: #f4f2ee,               // Slightly warmer cream - left sidebar
+  bg-pane-right: #fcfbf8,              // Light off-white - right pane
+  text-primary: #1a1410,               // Dark brown - primary text
+  text-secondary: #3d3228,             // Warm brown - secondary text
+  text-muted: #9a8f7e,                 // Taupe - labels and muted text
+  accent: #002bff,                     // Blue - UI accents, highlights
+  secondary: #0300A8,                  // Dark Blue - UI accents, highlights
+  tertiary: #7C0AFF,                  // Dark Blue - UI accents, highlights
+  border-dark: #1a1410,                // Dark brown - borders
+  divider-light: rgba(26, 20, 16, 0.12), // Subtle divider lines
+  card-bg: #edeae5,                    // Card background
 );
-@mixin font-variations-workbench($name) {
-  font-variation-settings: map-get($font-variations-workbench, $name);
+
+// Spacing system - for consistency
+$spacing: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+);
+
+// ===================================
+// LAYER 2: COMPONENT STYLES
+// ===================================
+
+// Divider elements - reusable separators
+.divider-thin {
+  height: 1px;
+  background-color: map.get($colors, divider-light);
+  margin: map.get($spacing, md) 0;
 }
-@font-face {
-  font-family: 'VT323';
-  src: url('assets/fonts/VT323.ttf');
+
+.divider-thin-inner {
+  height: 1px;
+  background-color: map.get($colors, divider-light);
+  margin: map.get($spacing, sm) 0;
 }
 
-@font-face {
-  font-family: 'Tagesschrift';
-  src: url('assets/fonts/Tagesschrift.ttf');
+.accent-rule {
+  height: 2px;
+  width: 51px;
+  background-color: map.get($colors, accent);
+  opacity: 0.7;
+  margin: map.get($spacing, sm) 0;
 }
 
-$accent: #002bff;
-$secondary: #0300a8;
-$tertiary: #7c0aff;
-$light: #fbfbfb;
-$lightBG: #faf9f5;
-$lightCream: #fff8f3;
-$dark: ##141413;
-$darkBG: #131240;
+// Tags for updates
+.update-tag {
+  display: inline-block;
+  background-color: map.get($colors, card-bg);
+  border: 1px solid map.get($colors, accent);
+  border-radius: 2px;
+  padding: map.get($spacing, xs) map.get($spacing, sm);
+  font-family: map.get(typography.$fonts, mono);
+  color: map.get($colors, accent);
+  font-size: 8px;
+  margin: 0 map.get($spacing, sm);
+  opacity: 0.85;
+  text-transform: uppercase;
+}
 
-$text: #202022;
+// Info cards - reusable component
+.info-card {
+  background-color: map.get($colors, card-bg);
+  border: 1.5px solid map.get($colors, border-dark);
+  border-radius: 5px;
+  padding: map.get($spacing, md);
+  box-shadow: 4px 4px 0px rgba(26, 20, 16, 0.18);
+  
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(26, 20, 16, 0.25);
+    transition: all 0.2s ease;
+  }
+}
+// ===================================
+// LAYER 3: LAYOUT STYLES
+// ===================================
 
-$strokeWidth: 2px;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  background-color: $light;
-  border: solid $strokeWidth $accent;
+  background-color: map.get($colors, bg-main);
+  color: map.get($colors, text-primary);
+  font-family: map.get(typography.$fonts, body);
 
-
-  main {
+  #app-container {
     display: grid;
-    height: 95vh;
+    height: 100vh;
+    grid-template-rows: 1fr auto;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 50px;
-
-
-    #div-content {
-      grid-column: 1;
+    
+    #page-main {
       grid-row: 1;
+      grid-column: 1;
       display: grid;
-      grid-template-rows: 1fr;
-      grid-template-columns: 0.5fr 1fr;
-
-      gap: 10px;
-      padding: 10px;
-
-      #div-content-left-pane {
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      height: 100%;
+    
+      // Left sidebar
+      .content-left {
         grid-column: 1;
-
-        border: solid $strokeWidth $accent;
-        border-radius: 15px;
-        background-color: $light;
-
-        padding: 15px;
-
-    #content-left-title h1{
-      font-family: 'Workbench', sans-serif;
-      font-size: 3rem;
-      color: $accent;
-      margin: inherit;
-
-      #title-pt1 {
-        color: $secondary;
+        padding: map.get($spacing, lg);
+        overflow-y: auto;
+        border-right: 2px solid map.get($colors, border-dark);
+        background-color: map.get($colors, bg-pane-left);
+      }
+      
+      // Right content pane
+      .content-right {
+        grid-column: 2;
+        padding: map.get($spacing, xl) map.get($spacing, lg);
+        overflow-y: auto;
+        background-color: map.get($colors, bg-pane-right);
       }
     }
   }
-
-      #div-content-right-pane {
-        grid-column: 2;
-
-        border: solid $strokeWidth $secondary;
-        border-radius: 15px;
-        background-color: $lightCream;
-
-        padding: 15px;
-      }
-    }
-
-    #navigation-bar {
-      grid-column: 1;
-      grid-row: 2;
-      //width: 100%;
-
-      display: grid;
-      grid-template-columns: 0.75fr 1fr;
-      grid-template-rows: 1fr;
+}
 
 
-      //width:
-      border-top: solid $strokeWidth $accent;
-      background-color: $light;
+// Page footer
+#page-footer {
+  grid-row: 2;
+  grid-column: 1;
+  border-top: 2px solid map.get($colors, border-dark);
+  background-color: map.get($colors, bg-main);
+}
 
-      ul { // Default for ul items
-        display: grid;
-        grid-auto-flow: column;
-        list-style-type: none;
+.bottom-align {
+  margin-top: 100vh;
+}
+// ===================================
+// LAYER 4: TYPOGRAPHY STYLES
+// ===================================
 
-        font-family: 'VT323', monospace; // add
-        color: $accent;
-      }
+// Profile name - left pane
+.profile-name {
+  font-family: map.get(typography.$fonts, display);
+  font-size: 52px;
+  color: map.get($colors, text-primary);
+  margin: 0;
+  line-height: 1.2;
+  @include typography.font-variations-workbench("close");
+}
 
-      #navigation-links { // L
-        grid-column: 1;
-        grid-row: 1;
-        align-self: start;
-      }
+.name-line1 {
+  @include typography.font-variations-workbench(overexposed);
+  display: block;
+  color: map.get($colors, accent);
+}
+.name-line2 {
+  @include typography.font-variations-workbench("close");
+  display: block;
+  color: map.get($colors, secondary);
+}
 
-      #navigation-buttons { // R
-        grid-column: 2;
-        text-align: center;
-        align-self: center;
-        margin: 0;
-      }
-    }
+// Section labels (BIO, RECENT UPDATES, etc.)
+.section-label {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 8px;
+  font-weight: bold;
+  color: map.get($colors, text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.12px;
+  margin: map.get($spacing, md) 0 map.get($spacing, sm) 0;
+}
+
+// Tagline text
+.tagline-text {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 11px;
+  color: map.get($colors, text-secondary);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.22px;
+}
+
+// Bio text
+.bio-text {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 11.5px;
+  color: map.get($colors, text-secondary);
+  line-height: 1.6;
+  margin: map.get($spacing, sm) 0;
+}
+
+//Credit text
+.credit-text {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 10px;
+  color: map.get($colors, text-muted);
+  line-height: 1.4;
+  margin-top: 100vh;
+  margin: map.get($spacing, sm) 0;
+}
+// Update items container and styles
+.updates-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-item {
+  display: flex;
+  align-items: center;
+  margin: map.get($spacing, sm) 0;
+  font-size: 9px;
+  gap: map.get($spacing, sm);
+}
+
+.update-date {
+  font-family: map.get(typography.$fonts, mono);
+  font-size: 9px;
+  color: map.get($colors, text-muted);
+  white-space: nowrap;
+}
+
+.update-message {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 10px;
+  color: map.get($colors, text-secondary);
+}
+
+// Right pane heading section
+.content-header {
+  margin-bottom: map.get($spacing, xl);
+}
+
+.eyebrow {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 9px;
+  color: map.get($colors, text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.08px;
+  margin: 0 0 map.get($spacing, sm) 0;
+}
+
+.heading {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 32px;
+  color: map.get($colors, text-primary);
+  margin: 0 0 map.get($spacing, md) 0;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.intro-text {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 13px;
+  color: map.get($colors, text-secondary);
+  line-height: 1.6;
+  margin: map.get($spacing, md) 0 map.get($spacing, xl) 0;
+  max-width: 90%;
+}
+
+// Card typography
+.card-label {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 8px;
+  font-weight: bold;
+  color: map.get($colors, text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 map.get($spacing, sm) 0;
+}
+
+.card-value {
+  font-family: map.get(typography.$fonts, body);
+  font-size: 12px;
+  font-weight: 600;
+  color: map.get($colors, text-primary);
+  margin: 0;
+}
+
+// ===================================
+// LAYOUT: INFO CARDS GRID
+// ===================================
+
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: map.get($spacing, lg);
+  margin-top: map.get($spacing, md);
+}
+
+// ===================================
+// NAVIGATION STYLES (temporary - to be refined)
+// ===================================
+
+#navigation-bar {
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+  grid-template-rows: 1fr;
+  padding: map.get($spacing, md);
+  
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: map.get(typography.$fonts, mono);
+    color: map.get($colors, accent);
+  }
+
+  #div-navigation-links {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  #div-navigation-buttons {
+    grid-column: 2;
+    text-align: center;
+    align-self: center;
+    margin: 0;
   }
 }

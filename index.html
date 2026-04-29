@@ -4,57 +4,96 @@
     <meta charset="UTF-8">
     <title>Ben's Site</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="typography.css">
     <link rel="stylesheet" href="workbench-font.css">
 </head>
+
+
 <body>
-    <main>
-        <div id="div-content">
-            <div id="div-content-left-pane">
-                <div id="div-content-left-title">
-                    <h1 class="title">
-                        <span class="title-pt1">Ben</span>
-                        <span class="title-pt2">Toon</span> <br>
-                        <span class="title-pt3">Welcome</span>
+
+    <main id="app-container">
+        <section id="page-main">
+            <section class="content-left">
+                <header class="profile-header">
+                    <h1 class="profile-name">
+                        <span class="name-line1">Ben</span>
+                        <span class="name-line2">Toon</span>
                     </h1>
+                </header>
+
+                <div class="profile-tagline">
+                    <p class="tagline-text">CS · Lancaster</p>
+                    <p class="tagline-text">more coming soon</p>
                 </div>
 
-                <div id="div-content-left-description">
-                    <p>
-                        This is a description of myself.
-                    </p>
+                <div class="divider-thin"></div>
+
+                <section class="profile-bio">
+                    <h2 class="section-label">BIO</h2>
+                    <p class="bio-text">I'm a first-year CS student at Lancaster University</p>
+                </section>
+
+                <div class="divider-thin"></div>
+
+                <div class="credit-text">Designed and programmed myself ❤️</div>
+            </section>
+
+            <section class="content-right">
+                <div class="content-header">
+
+                    <h1 class="heading">Welcome</h1>
+                    <div class="accent-rule"></div>
                 </div>
-                <hr>
-                <div id="div-content-left-body">
-                    <p>
-                        This is the body of the page.
-                    </p>
+
+                <p class="intro-text">Welcome to the new redesigned website! It's heavily work in progress at the moment, so expect things to be broken for the time being.<br><br>
+                Eventually, blog posts and projects will be showcased here.</p>
+<section class="profile-updates">
+                    <h2 class="section-label">Recent Updates</h2>
+                    <div class="updates-list">
+                        <div class="update-item">
+                            <span class="update-date">Apr 29 2026</span>
+                            <span class="update-tag">Website</span>
+                            <span class="update-message">Redesign launch???</span>
+                        
+                    </div>
+                </section>
+                <h2 class="section-label">// Links</h2>
+                <div class="info-cards-grid">
+                    <div class="info-card">
+                        <p class="card-label">Item 1</p>
+                        <p class="card-value">Work in Progress</p>
+                    </div>
+                    <div class="info-card">
+                        <p class="card-label">Item 2</p>
+                        <p class="card-value">Work in Progress</p>
+                    </div>
                 </div>
-            </div>
 
-            <div id="div-content-right-pane">
-                Right Pane
-            </div>
-        </div>
+            </section>
+        </section>
 
+        <footer id="page-footer">
+            <nav id="navigation-bar">
+                <div id="div-navigation-links" style="display: grid; grid-template-columns: repeat(2, 1fr);">
+                    <ul>
+                        <li> 1 </li>
+                        <li> 2 </li>
+                    </ul>
+                </div>
 
-        <nav id="navigation-bar">
-            <div id="div-navigation-links" style="display: grid; grid-template-columns: repeat(2, 1fr);">
-                <ul>
-                    <li> 1 </li>
-                    <li> 2 </li>
-                </ul>
-            </div>
+                <div id="div-navigation-buttons">
+                    <ul>
+                        <li> Home </li>
+                        <li> Projects </li>
+                        <li> Blog </li>
+                    </ul>
+                </div>
+            </nav>
+        </footer>
 
-            <div id="div-navigation-buttons">
-                <ul>
-                    <li> Home </li>
-                    <li> Projects </li>
-                    <li> Blog </li>
-                </ul>
-            </div>
-        </nav>
     </main>
 
-
 </body>
+
+
 </html>

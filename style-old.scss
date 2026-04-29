@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'Workbench';
+  src: url('assets/fonts/Workbench.ttf');
+}
+
+$font-variations-workbench: (
+        overexposed: (SCAN: 67, BLED: 0),
+        overlapping: (SCAN: 37, BLED: 0),
+        touching: (SCAN: 21, BLED: 0),
+        close: (SCAN: 0, BLED: 0),
+        evenly: (SCAN: -27, BLED: 0),
+        slight: (SCAN: -45, BLED: 0),
+        delicate: (SCAN: -53, BLED: 0),
+);
+@mixin font-variations-workbench($name) {
+  font-variation-settings: map-get($font-variations-workbench, $name);
+}
+@font-face {
+  font-family: 'VT323';
+  src: url('assets/fonts/VT323.ttf');
+}
+
+@font-face {
+  font-family: 'Tagesschrift';
+  src: url('assets/fonts/Tagesschrift.ttf');
+}
+
+$accent: #002bff;
+$secondary: #0300a8;
+$tertiary: #7c0aff;
+$light: #fbfbfb;
+$lightBG: #faf9f5;
+$lightCream: #fff8f3;
+$dark: #141413;
+$darkBG: #131240;
+
+$text: #202022;
+
+$strokeWidth: 2px;
+
+body {
+  background-color: $light;
+  border: solid $strokeWidth $accent;
+
+
+  #app-container {
+    display: grid;
+    height: 95vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 50px;
+
+    #page-main {
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: 0.5fr 1fr;
+
+      gap: 10px;
+      padding: 10px;
+
+      #div-content-left-pane {
+        grid-column: 1;
+
+        border: solid $strokeWidth $accent;
+        border-radius: 15px;
+        background-color: $light;
+
+        padding: 15px;
+
+    #content-left-title h1{
+      font-family: 'Workbench', sans-serif;
+      font-size: 3rem;
+      color: $accent;
+      margin: inherit;
+
+      #title-pt1 {
+        color: $secondary;
+      }
+    }
+  }
+
+      #div-content-right-pane {
+        grid-column: 2;
+
+        border: solid $strokeWidth $secondary;
+        border-radius: 15px;
+        background-color: $lightCream;
+
+        padding: 15px;
+      }
+    }
+
+    #page-footer {
+      grid-column: 1;
+      grid-row: 2;
+      //width: 100%;
+
+      display: grid;
+      grid-template-columns: 0.75fr 1fr;
+      grid-template-rows: 1fr;
+
+
+      //width:
+      border-top: solid $strokeWidth $accent;
+      background-color: $light;
+
+      ul { // Default for ul items
+        display: grid;
+        grid-auto-flow: column;
+        list-style-type: none;
+
+        font-family: 'VT323', monospace; // add
+        color: $accent;
+      }
+
+      #navigation-links { // L
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
+      }
+
+      #navigation-buttons { // R
+        grid-column: 2;
+        text-align: center;
+        align-self: center;
+        margin: 0;
+      }
+    }
+  }
+}
