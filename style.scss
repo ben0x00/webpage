@@ -29,9 +29,9 @@ $accent: #002bff;
 $secondary: #0300a8;
 $tertiary: #7c0aff;
 $light: #fbfbfb;
-$lightBG: #fbf7f3;
+$lightBG: #faf9f5;
 $lightCream: #fff8f3;
-$dark: #202022;
+$dark: ##141413;
 $darkBG: #131240;
 
 $text: #202022;
@@ -69,37 +69,17 @@ body {
 
         padding: 15px;
 
-        .title {
-          font-family: 'Workbench', monospace;
-          font-size: 3rem;
-          color: $accent;
-          margin: inherit;
+    #content-left-title h1{
+      font-family: 'Workbench', sans-serif;
+      font-size: 3rem;
+      //color: $accent;
+      margin: inherit;
 
-          .title-pt1 {
-            font-variation-settings: 'SCAN' 21, 'BLED' 0; // 'touching'
-          }
-
-          .title-pt2 {
-            font-variation-settings: 'SCAN' 0, 'BLED' 0; // 'close'
-          }
-
-          .title-pt3 {
-            font-variation-settings: 'SCAN' -27, 'BLED' 0; // 'evenly'
-          }
-        }
-
-        #div-content-left-description {
-          font-family: 'Tagesschrift', monospace;
-          font-size: 1rem;
-          color: $secondary;
-          margin: inherit;
-        }
-
-        #div-content-left-body {
-          font-family: sans-serif;
-          color: $text;
-        }
+      #title-pt1 {
+        color: $secondary;
       }
+    }
+  }
 
       #div-content-right-pane {
         grid-column: 2;
