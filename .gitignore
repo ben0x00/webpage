@@ -6,3 +6,10 @@
 style-old.css.map
 typography.css.map
 style-old.css
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
