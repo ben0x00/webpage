@@ -57,6 +57,20 @@
                         
                     </div>
                 </section>
+                
+                <div id="townsquare-root"></div>
+                <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css" />
+                <script type="module">
+                import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
+
+                mountTownSquare(document.getElementById("townsquare-root"), {
+                    serverOrigin: "https://townsquare.cauenapier.com",
+                    siteKey: "site_lNSdQI6i2Np3dlZW",
+                    scene: {"benches":2,"benchXs":[0.2,0.72],"trees":6,"treeXs":[0.2,0.58,0.36,0.9,0.05,0.68],"lamps":4,"lampXs":[0.12,0.88,0.36,0.64],"birds":3},
+                    theme: "host"
+                });
+                </script>
+
                 <h2 class="section-label">// Links</h2>
                 <div class="info-cards-grid">
                     <div class="info-card">
@@ -68,6 +82,7 @@
                         <p class="card-value">Work in Progress</p>
                     </div>
                 </div>
+                
 
             </section>
         </section>
