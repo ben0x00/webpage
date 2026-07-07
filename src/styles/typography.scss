@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Workbench';
-  src: url('assets/fonts/Workbench.ttf');
+  src: url('../fonts/Workbench.ttf');
 }
 
 $font-variations-workbench: (
@@ -31,12 +31,12 @@ $font-variations-workbench: (
 
 @font-face {
   font-family: 'VT323';
-  src: url('assets/fonts/VT323.ttf');
+  src: url('../fonts/VT323.ttf');
 }
 
 @font-face {
   font-family: 'Tagesschrift';
-  src: url('assets/fonts/Tagesschrift.ttf');
+  src: url('../fonts/Tagesschrift.ttf');
 }
 
 @font-face {
@@ -46,11 +46,11 @@ $font-variations-workbench: (
 
 @font-face {
   font-family: 'Charis_SIL';
-  src: url('assets/fonts/CharisSIL-Regular.ttf');
+  src: url('../fonts/CharisSIL-Regular.ttf');
 }
 @font-face {
     font-family: 'Charis_SIL_Bold';
-    src: url('assets/fonts/CharisSIL-Bold.ttf');
+    src: url('../fonts/CharisSIL-Bold.ttf');
 }
 // Typography - font families
 $fonts: (
