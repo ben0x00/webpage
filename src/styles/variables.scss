@@ -1,0 +1,23 @@
+$colours: (
+  bg-main: #faf9f5,                    // Warm cream - main background
+  bg-pane-left: #f4f2ee,               // Slightly warmer cream - left sidebar
+  bg-pane-right: #fcfbf8,              // Light off-white - right pane
+  text-primary: #1a1410,               // Dark brown - primary text
+  text-secondary: #3d3228,             // Warm brown - secondary text
+  text-muted: #9a8f7e,                 // Taupe - labels and muted text
+  accent: #002bff,                     // Blue - UI accents, highlights
+  secondary: #0300A8,                  // Dark Blue - UI accents, highlights
+  tertiary: #7C0AFF,                  // Dark Blue - UI accents, highlights
+  border-dark: #1a1410,                // Dark brown - borders
+  divider-light: rgba(26, 20, 16, 0.12), // Subtle divider lines
+  card-bg: #edeae5,                    // Card background
+);
+
+// Spacing system - for consistency
+$spacing: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+);
