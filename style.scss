@@ -191,9 +191,20 @@ body {
       // Right content pane
       .content-right {
         grid-column: 2;
+        display: grid;
+        grid-template-columns: 1;
+        grid-template-rows: 1;
+        max-width: 200px;
         padding: map.get($spacing, xl) map.get($spacing, lg);
         overflow-y: auto;
         background-color: map.get($colors, bg-pane-right);
+      
+
+        .content-right-container {
+          grid-column: 1;
+          grid-row: 1;
+          max-width: 200px;
+        }
       }
     }
   }
