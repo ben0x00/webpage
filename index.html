@@ -38,52 +38,54 @@
                 <div class="credit-text">Designed and programmed myself ❤️</div>
             </section>
 
+
+
             <section class="content-right">
-                <div class="content-header">
+                <div class="content-right-container">
+                    <div class="content-header">
 
-                    <h1 class="heading">Welcome</h1>
-                    <div class="accent-rule"></div>
+                        <h1 class="heading">Welcome</h1>
+                        <div class="accent-rule"></div>
+                    </div>
+
+                    <p class="intro-text">Welcome to the new redesigned website! It's heavily work in progress at the moment, so expect things to be broken for the time being.<br><br>
+                    Eventually, blog posts and projects will be showcased here.</p>
+                        <section class="profile-updates">
+                        <h2 class="section-label">Recent Updates</h2>
+                        <div class="updates-list">
+                            <div class="update-item">
+                                <span class="update-date">Apr 29 2026</span>
+                                <span class="update-tag">Website</span>
+                                <span class="update-message">Redesign launch???</span>
+                            
+                        </div>
+                    </section>
+                    
+                    <div id="townsquare-root"></div>
+                    <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css" />
+                    <script type="module">
+                    import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
+
+                    mountTownSquare(document.getElementById("townsquare-root"), {
+                        serverOrigin: "https://townsquare.cauenapier.com",
+                        siteKey: "site_lNSdQI6i2Np3dlZW",
+                        scene: {"benches":2,"benchXs":[0.2,0.72],"trees":6,"treeXs":[0.2,0.58,0.36,0.9,0.05,0.68],"lamps":4,"lampXs":[0.12,0.88,0.36,0.64],"birds":3},
+                        theme: "host"
+                    });
+                    </script>
+
+                    <h2 class="section-label">// Links</h2>
+                    <div class="info-cards-grid">
+                        <div class="info-card">
+                            <p class="card-label">Item 1</p>
+                            <p class="card-value">Work in Progress</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="card-label">Item 2</p>
+                            <p class="card-value">Work in Progress</p>
+                        </div>
+                    </div>
                 </div>
-
-                <p class="intro-text">Welcome to the new redesigned website! It's heavily work in progress at the moment, so expect things to be broken for the time being.<br><br>
-                Eventually, blog posts and projects will be showcased here.</p>
-<section class="profile-updates">
-                    <h2 class="section-label">Recent Updates</h2>
-                    <div class="updates-list">
-                        <div class="update-item">
-                            <span class="update-date">Apr 29 2026</span>
-                            <span class="update-tag">Website</span>
-                            <span class="update-message">Redesign launch???</span>
-                        
-                    </div>
-                </section>
-                
-                <div id="townsquare-root"></div>
-                <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css" />
-                <script type="module">
-                import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
-
-                mountTownSquare(document.getElementById("townsquare-root"), {
-                    serverOrigin: "https://townsquare.cauenapier.com",
-                    siteKey: "site_lNSdQI6i2Np3dlZW",
-                    scene: {"benches":2,"benchXs":[0.2,0.72],"trees":6,"treeXs":[0.2,0.58,0.36,0.9,0.05,0.68],"lamps":4,"lampXs":[0.12,0.88,0.36,0.64],"birds":3},
-                    theme: "host"
-                });
-                </script>
-
-                <h2 class="section-label">// Links</h2>
-                <div class="info-cards-grid">
-                    <div class="info-card">
-                        <p class="card-label">Item 1</p>
-                        <p class="card-value">Work in Progress</p>
-                    </div>
-                    <div class="info-card">
-                        <p class="card-label">Item 2</p>
-                        <p class="card-value">Work in Progress</p>
-                    </div>
-                </div>
-                
-
             </section>
         </section>
 
