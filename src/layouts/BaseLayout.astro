@@ -1,0 +1,43 @@
+---
+import '../styles/style.scss';
+import '../styles/variables.scss'
+import '../styles/typography.scss'
+
+import Sidebar from '../components/Sidebar.astro'
+import Contents from '../components/Contents.astro'
+import MenuBar from '../components/MenuBar.astro'
+
+const {title} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ben's Site</title>
+    <link rel="stylesheet" href="workbench-font.css">
+</head>
+
+
+<body>
+
+    <main id="app-container">
+        <section id="page-main">
+
+            <Sidebar />
+
+            <Contents titleText={title}>
+                <slot/>
+            </Contents>
+
+        </section>
+
+        <MenuBar />
+
+    </main>
+
+</body>
+
+
+</html>
