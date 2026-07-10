@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar.astro'
 import Contents from '../components/Contents.astro'
 import MenuBar from '../components/MenuBar.astro'
 
-const {title} = Astro.props;
+const { titleText } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ const {title} = Astro.props;
 
             <Sidebar />
 
-            <Contents titleText={title}>
+            <Contents titleText = { titleText }>
                 <slot/>
             </Contents>
 
