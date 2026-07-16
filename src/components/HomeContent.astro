@@ -1,5 +1,6 @@
 ---
 import TownSquare from '../components/TownSquare.astro'
+import InfoCard from '../components/InfoCard.astro'
 ---
 
 <p class="intro-text">Welcome to my redesigned website! It's heavily work in progress at the
@@ -20,14 +21,8 @@ import TownSquare from '../components/TownSquare.astro'
 
 <h2 class="section-label">// Links</h2>
 <div class="info-cards-grid">
-    <div class="info-card">
-        <p class="card-label">Item 1</p>
-        <p class="card-value">Work in Progress</p>
-    </div>
-    <div class="info-card">
-        <p class="card-label">Item 2</p>
-        <p class="card-value">Work in Progress</p>
-    </div>
+    <InfoCard label="Item 1" content="Content" />
+    <InfoCard label="Item 2" content="Content" />
 </div>
 
 <TownSquare />
