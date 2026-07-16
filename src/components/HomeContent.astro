@@ -1,22 +1,23 @@
 ---
 import TownSquare from '../components/TownSquare.astro'
 import InfoCard from '../components/InfoCard.astro'
+import UpdatesList from '../components/UpdatesList.astro'
+
+const updates = [
+    {
+        date: 'Apr 29 2026',
+        tag: 'Website',
+        message: 'Redesign launch???',
+    },
+];
 ---
 
 <p class="intro-text">Welcome to my redesigned website! It's heavily work in progress at the
     moment, so expect things to be broken for the time being.<br><br>
-    Eventually, blog posts and projects will be showcased here.</p>
-<section class="profile-updates">
-    <h2 class="section-label">Recent Updates</h2>
-    <div class="updates-list">
-        <div class="update-item">
-            <span class="update-date">Apr 29 2026</span>
-            <span class="update-tag">Website</span>
-            <span class="update-message">Redesign launch???</span>
+    Eventually, blog posts and projects will be showcased here.
+</p>
 
-        </div>
-    </div>
-</section>
+<UpdatesList title="Recent Updates" updates={updates} />
 
 
 <h2 class="section-label">// Links</h2>

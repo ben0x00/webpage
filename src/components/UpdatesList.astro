@@ -1,0 +1,65 @@
+---
+const {
+    title = 'Recent Updates',
+    updates = [
+        { date: 'Apr 29 2026', tag: 'Website', message: 'Redesign launch???' },
+    ],
+} = Astro.props;
+---
+
+<section class="profile-updates">
+    <h2 class="section-label">{title}</h2>
+    <div class="updates-list">
+        {updates.map((update) => (
+            <div class="update-item">
+                <span class="update-date">{update.date}</span>
+                <span class="update-tag">{update.tag}</span>
+                <span class="update-message">{update.message}</span>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style lang="scss">
+@use 'sass:map';
+@use '../styles/typography';
+@use '../styles/variables';
+
+.updates-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-item {
+    display: flex;
+    align-items: center;
+    gap: map.get(variables.$spacing, sm);
+    margin: map.get(variables.$spacing, sm) 0;
+    font-size: 9px;
+}
+
+.update-date {
+    font-family: map.get(typography.$fonts, mono);
+    color: map.get(variables.$colours, text-muted);
+    white-space: nowrap;
+}
+
+.update-tag {
+    display: inline-block;
+    background-color: map.get(variables.$colours, card-bg);
+    border: 1px solid map.get(variables.$colours, accent);
+    border-radius: 2px;
+    padding: map.get(variables.$spacing, xs) map.get(variables.$spacing, sm);
+    font-family: map.get(typography.$fonts, mono);
+    color: map.get(variables.$colours, accent);
+    font-size: 8px;
+    opacity: 0.85;
+    text-transform: uppercase;
+}
+
+.update-message {
+    font-family: map.get(typography.$fonts, body);
+    font-size: 10px;
+    color: map.get(variables.$colours, text-secondary);
+}
+</style>

@@ -29,21 +29,6 @@
   margin: map.get(variables.$spacing, sm) 0;
 }
 
-// Tags for updates
-.update-tag {
-  display: inline-block;
-  background-color: map.get(variables.$colours, card-bg);
-  border: 1px solid map.get(variables.$colours, accent);
-  border-radius: 2px;
-  padding: map.get(variables.$spacing, xs) map.get(variables.$spacing, sm);
-  font-family: map.get(typography.$fonts, mono);
-  color: map.get(variables.$colours, accent);
-  font-size: 8px;
-  margin: 0 map.get(variables.$spacing, sm);
-  opacity: 0.85;
-  text-transform: uppercase;
-}
-
 // Info cards - reusable component
 .info-card {
   background-color: map.get(variables.$colours, card-bg);
@@ -258,32 +243,6 @@ body {
   line-height: 1.4;
   margin-top: 100vh;
   margin: map.get(variables.$spacing, sm) 0;
-}
-// Update items container and styles
-.updates-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.update-item {
-  display: flex;
-  align-items: center;
-  margin: map.get(variables.$spacing, sm) 0;
-  font-size: 9px;
-  gap: map.get(variables.$spacing, sm);
-}
-
-.update-date {
-  font-family: map.get(typography.$fonts, mono);
-  font-size: 9px;
-  color: map.get(variables.$colours, text-muted);
-  white-space: nowrap;
-}
-
-.update-message {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 10px;
-  color: map.get(variables.$colours, text-secondary);
 }
 
 // Right pane heading section
