@@ -1,16 +1,9 @@
 ---
-// Global styles
-import '../styles/style.scss';
-import '../styles/variables.scss'
-import '../styles/typography.scss'
-// Components
-import Sidebar from '../components/Sidebar.astro'
 import Contents from '../components/Contents.astro'
 import NavigationBar from '../components/NavigationBar.astro'
-// Attributes
-const { titleText } = Astro.props;
----
 
+const { frontmatter } = Astro.props;
+---
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +19,8 @@ const { titleText } = Astro.props;
     <main id="app-container">
         <section id="page-main">
 
-            <Sidebar />
-
-            <Contents titleText = { titleText }>
-                <slot/>
+            <Contents titleText={ titleText }>
+                <slot />
             </Contents>
 
         </section>

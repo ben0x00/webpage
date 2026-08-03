@@ -30,19 +30,7 @@
 }
 
 // Info cards - reusable component
-.info-card {
-  background-color: map.get(variables.$colours, card-bg);
-  border: 1.5px solid map.get(variables.$colours, border-dark);
-  border-radius: 5px;
-  padding: map.get(variables.$spacing, md);
-  box-shadow: 4px 4px 0px rgba(26, 20, 16, 0.18);
-  
-  &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px rgba(26, 20, 16, 0.25);
-    transition: all 0.2s ease;
-  }
-}
+
 
 // Fun townsquare thing imported
 #townsquare-root#townsquare-root {
@@ -105,6 +93,7 @@
 #townsquare-root#townsquare-root .townsquare__ground {
   background: var(--ground);
 }
+
 // ===================================
 // LAYER 3: LAYOUT STYLES
 // ===================================
@@ -207,17 +196,17 @@ body {
 
 // Section labels (BIO, RECENT UPDATES, etc.)
 .section-label {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 8px;
-  font-weight: bold;
+  font-family: map.get(typography.$fonts, subtitle);
+  font-size: 0.75rem;
+
+  font-weight: normal;
   color: map.get(variables.$colours, text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1.12px;
+  text-transform: title;
   margin: map.get(variables.$spacing, md) 0 map.get(variables.$spacing, sm) 0;
 }
 
 // Tagline text
-.tagline-text {
+.subtitle-text {
   font-family: map.get(typography.$fonts, body);
   font-size: 11px;
   color: map.get(variables.$colours, text-secondary);
@@ -278,35 +267,7 @@ body {
   max-width: 90%;
 }
 
-// Card typography
-.card-label {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 8px;
-  font-weight: bold;
-  color: map.get(variables.$colours, text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin: 0 0 map.get(variables.$spacing, sm) 0;
-}
 
-.card-value {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 12px;
-  font-weight: 600;
-  color: map.get(variables.$colours, text-primary);
-  margin: 0;
-}
-
-// ===================================
-// LAYOUT: INFO CARDS GRID
-// ===================================
-
-.info-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: map.get(variables.$spacing, lg);
-  margin-top: map.get(variables.$spacing, md);
-}
 
 // ===================================
 // NAVIGATION STYLES (temporary - to be refined)

@@ -40,9 +40,14 @@ $font-variations-workbench: (
 }
 
 @font-face {
-  font-family: 'Instrument Serif';
-  src: url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-}
+  font-family: 'Instrument_Serif';
+    src: url('../fonts/InstrumentSerif-Regular.ttf');
+  }
+
+@font-face {
+  font-family: 'Instrument_Serif_Italic';
+    src: url('../fonts/InstrumentSerif-Italic.ttf');
+  }
 
 @font-face {
   font-family: 'Charis_SIL';
@@ -55,6 +60,8 @@ $font-variations-workbench: (
 // Typography - font families
 $fonts: (
   display: ('Workbench', sans-serif),
+  title: ('Instrument_Serif', serif),
+  subtitle: ('Instrument_Serif', serif),
   body: ('Charis_SIL', serif),
   mono: ('VT323', monospace)
 );

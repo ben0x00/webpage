@@ -12,6 +12,19 @@ const updates = [
 ];
 ---
 
+<style lang="scss">
+@use 'sass:map';
+@use '../styles/typography';
+@use '../styles/variables';
+
+    .info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: map.get(variables.$spacing, lg);
+    margin-top: map.get(variables.$spacing, md);
+    }
+</style>
+
 <p class="intro-text">Welcome to my redesigned website! It's heavily work in progress at the
     moment, so expect things to be broken for the time being.<br><br>
     Eventually, blog posts and projects will be showcased here.
@@ -20,7 +33,7 @@ const updates = [
 <UpdatesList title="Recent Updates" updates={updates} />
 
 
-<h2 class="section-label">// Links</h2>
+<h2 class="section-label">Links</h2>
 <div class="info-cards-grid">
     <InfoCard label="Item 1" content="Content" />
     <InfoCard label="Item 2" content="Content" />
