@@ -115,7 +115,7 @@ body {
 
   #app-container {
     display: grid;
-    height: 100vh;
+    height: 100dvh;
     grid-template-rows: 1fr auto;
     grid-template-columns: 1fr;
     
@@ -126,6 +126,7 @@ body {
       grid-template-columns: 240px 1fr;
       gap: 0;
       height: 100%;
+      min-height: 0;
     
       // Left sidebar
       .content-left {
@@ -134,6 +135,7 @@ body {
         overflow-y: auto;
         border-right: 2px solid map.get(variables.$colours, border-dark);
         background-color: map.get(variables.$colours, bg-pane-left);
+        min-height: 0;
       }
       
       // Right content pane
@@ -146,7 +148,7 @@ body {
         padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
         overflow-y: auto;
         background-color: map.get(variables.$colours, bg-pane-right);
-      
+        min-height: 0;
 
         .content-right-container {
           grid-column: 1;
@@ -187,33 +189,3 @@ body {
 // ===================================
 // NAVIGATION STYLES (temporary - to be refined)
 // ===================================
-
-#navigation-bar {
-  display: grid;
-  grid-template-columns: 0.75fr 1fr;
-  grid-template-rows: 1fr;
-  padding: map.get(variables.$spacing, md);
-  
-  ul {
-    display: grid;
-    grid-auto-flow: column;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    font-family: map.get(typography.$fonts, mono);
-    color: map.get(variables.$colours, accent);
-  }
-
-  #div-navigation-links {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: start;
-  }
-
-  #div-navigation-buttons {
-    grid-column: 2;
-    text-align: center;
-    align-self: center;
-    margin: 0;
-  }
-}

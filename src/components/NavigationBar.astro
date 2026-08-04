@@ -18,3 +18,39 @@
         </div>
     </nav>
 </footer>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    #navigation-bar {
+        display: grid;
+        grid-template-columns: 0.75fr 1fr;
+        grid-template-rows: 1fr;
+        padding: map.get(variables.$spacing, md);
+
+        ul {
+            display: grid;
+            grid-auto-flow: column;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-family: map.get(typography.$fonts, mono);
+            color: map.get(variables.$colours, accent);
+        }
+
+        #div-navigation-links {
+            grid-column: 1;
+            grid-row: 1;
+            align-self: start;
+        }
+
+        #div-navigation-buttons {
+            grid-column: 2;
+            text-align: center;
+            align-self: center;
+            margin: 0;
+        }
+    }
+</style>
