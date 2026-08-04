@@ -158,7 +158,6 @@ body {
         grid-template-rows: 1;
         padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
         overflow-y: auto;
-        background-color: map.get(variables.$colours, bg-pane-right);
         min-height: 0;
         max-width: 500px;
         min-width: 0;
@@ -176,13 +175,6 @@ body {
 
 
 // Page footer
-#page-footer {
-  grid-row: 2;
-  grid-column: 1;
-  border-top: 2px solid map.get(variables.$colours, border-dark);
-  background-color: map.get(variables.$colours, bg-main);
-  z-index: 1;
-}
 
 .bottom-align {
   margin-top: 100vh;

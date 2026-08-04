@@ -24,6 +24,14 @@
     @use '../styles/typography';
     @use '../styles/variables';
 
+    #page-footer {
+        grid-row: 2;
+        grid-column: 1;
+        border-top: 2px solid map.get(variables.$colours, border-dark);
+        background-color: map.get(variables.$colours, bg-main);
+        z-index: 1;
+    }
+
     #navigation-bar {
         display: grid;
         grid-template-columns: 0.75fr 1fr;
