@@ -154,17 +154,20 @@ body {
       .content-right {
         grid-column: 2;
         display: grid;
-        grid-template-columns: 1;
-        grid-template-rows: 1;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
         padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
         overflow-y: auto;
         min-height: 0;
-        max-width: 500px;
         min-width: 0;
 
         z-index: 0;
 
         .content-right-container {
+          width: min(100%, 68ch);
+          margin-inline: auto;
+          justify-self: center;
+          min-width: 0;
           grid-column: 1;
           grid-row: 1;
         }
@@ -172,9 +175,6 @@ body {
     }
   }
 }
-
-
-// Page footer
 
 .bottom-align {
   margin-top: 100vh;
