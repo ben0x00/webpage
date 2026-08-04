@@ -111,8 +111,15 @@ const isMarkdownPost = Boolean(frontmatter);
 .markdown-post :global(a) {
     color: map.get(variables.$colours, accent);
     text-underline-offset: 0.18em;
-    text-decoration: map.get(variables.$colours, accent) dashed underline;
+    text-decoration: underline dashed blue;
+    transition: text-decoration-style 160ms ease;
 }
+
+.markdown-post :global(a:hover) {
+    color: map.get(variables.$colours, accent);
+    text-decoration-style: solid;
+}
+
 
 .markdown-post :global(code) {
     font-family: map.get(typography.$fonts, code);
