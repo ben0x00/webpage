@@ -119,11 +119,21 @@ body {
     grid-template-rows: 1fr auto;
     grid-template-columns: 1fr;
     
+    @media (max-width: 76px) {
+      #page-main {
+        grid-template-columns: 1fr;
+      }
+      .content-left {
+        border-right: 0;
+        
+      }
+    }
+
     #page-main {
       grid-row: 1;
       grid-column: 1;
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: clamp(170px, 24vw, 240px) minmax(0, 1fr);
       gap: 0;
       height: 100%;
       min-height: 0;
@@ -136,6 +146,8 @@ body {
         border-right: 2px solid map.get(variables.$colours, border-dark);
         background-color: map.get(variables.$colours, bg-pane-left);
         min-height: 0;
+        min-width: 0;
+        z-index: 1;
       }
       
       // Right content pane
@@ -144,11 +156,14 @@ body {
         display: grid;
         grid-template-columns: 1;
         grid-template-rows: 1;
-        max-width: 500px;
         padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
         overflow-y: auto;
         background-color: map.get(variables.$colours, bg-pane-right);
         min-height: 0;
+        max-width: 500px;
+        min-width: 0;
+
+        z-index: 0;
 
         .content-right-container {
           grid-column: 1;
@@ -166,6 +181,7 @@ body {
   grid-column: 1;
   border-top: 2px solid map.get(variables.$colours, border-dark);
   background-color: map.get(variables.$colours, bg-main);
+  z-index: 1;
 }
 
 .bottom-align {
