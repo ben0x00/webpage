@@ -35,40 +35,48 @@ const currentPath = Astro.url.pathname;
 
     #navigation-bar {
         display: grid;
-        grid-template-columns: 0.75fr 1fr;
-        align-items: center;
-        padding: map.get(variables.$spacing, md);
 
-        #div-navigation-links, #div-navigation-buttons {
+        grid-template-columns: clamp(170px, 24vw, 240px) minmax(0, 1fr);
+
+
+        align-items: center;
+
+        #div-navigation-links,
+        #div-navigation-buttons {
             display: flex;
-            align-items: center;
             justify-content: center;
+        }
+
+        #div-navigation-links {
+        }
+
+        #div-navigation-buttons {
+            min-width: 265px;
         }
 
         .nav-links,
         .nav-buttons {
             display: flex;
-            align-items: center;
             list-style: none;
-            margin: 0;
             padding: 0;
+            margin: .75rem;
         }
 
         .nav-links {
-            gap: .75rem;
+            justify-content: space-around;
+            margin: 0;
+            width: 100%;
         }
 
         .nav-buttons {
+            display: flex;
             justify-content: center;
+            width: 100%;
             gap: .75rem;
         }
 
         .nav-buttons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             padding: .5rem 1rem;
-
             border: 2px dashed map.get(variables.$colours, accent);
             border-radius: 5px;
             background: map.get(variables.$colours, bg-pane-right);
@@ -79,7 +87,7 @@ const currentPath = Astro.url.pathname;
 
             transition: background 0.3s ease, color 0.1s linear, border-color 0.25s ease, transform 0.2s ease;
         }
-        
+
         .nav-buttons a.is-active {
             background: map.get(variables.$colours, accent);
             color: map.get(variables.$colours, bg-main);
@@ -97,4 +105,10 @@ const currentPath = Astro.url.pathname;
             transform: translateY(1.5px);
         }
     }
+
+    @media (max-width: 400px) { // Shrink links on small screens
+            #navigation-bar {
+                grid-template-columns: clamp(75px, 10vw, 170px) minmax(0, 1fr);
+            }
+        }
 </style>
