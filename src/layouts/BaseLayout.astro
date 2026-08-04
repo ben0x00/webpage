@@ -10,6 +10,7 @@ import NavigationBar from '../components/NavigationBar.astro';
 
 const { titleText, frontmatter } = Astro.props;
 const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
+const isMarkdownPost = Boolean(frontmatter);
 ---
 
 <!DOCTYPE html>
@@ -34,7 +35,13 @@ const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
                         frontmatter={frontmatter}
                     />
 
-                    <slot />
+                    {isMarkdownPost ? (
+                        <article class="markdown-post">
+                            <slot />
+                        </article>
+                    ) : (
+                        <slot />
+                    )}
 
 
                 </div>
@@ -48,3 +55,93 @@ const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
 </body>
 
 </html>
+
+<style lang="scss">
+@use 'sass:map';
+@use '../styles/typography';
+@use '../styles/variables';
+
+.markdown-post {
+    display: flex;
+    flex-direction: column;
+    gap: map.get(variables.$spacing, md);
+    max-width: 42rem;
+    margin-top: map.get(variables.$spacing, lg);
+    padding-top: map.get(variables.$spacing, md);
+    border-top: 1px solid map.get(variables.$colours, divider-light);
+}
+
+.markdown-post :global(h1),
+.markdown-post :global(h2),
+.markdown-post :global(h3),
+.markdown-post :global(h4),
+.markdown-post :global(h5),
+.markdown-post :global(h6) {
+    font-family: map.get(typography.$fonts, heading);
+    color: map.get(variables.$colours, text-primary);
+}
+
+.markdown-post :global(p) {
+    margin: 0;
+}
+
+.markdown-post :global(ul),
+.markdown-post :global(ol) {
+    margin: 0;
+    padding-left: 1.4rem;
+}
+
+.markdown-post :global(blockquote) {
+    margin: .2em 0em .5em 0em;
+    padding-left: map.get(variables.$spacing, md);
+    border-left: 2px solid map.get(variables.$colours, accent);
+    border-radius: 2px;
+    color: map.get(variables.$colours, text-primary);
+    font-style: italic;
+}
+
+.markdown-post :global(hr) {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid map.get(variables.$colours, divider-light);
+    border-radius: 2px;
+    margin: map.get(variables.$spacing, md) 0;
+}
+
+.markdown-post :global(a) {
+    color: map.get(variables.$colours, accent);
+    text-underline-offset: 0.18em;
+    text-decoration: map.get(variables.$colours, accent) dashed underline;
+}
+
+.markdown-post :global(code) {
+    font-family: map.get(typography.$fonts, code);
+    font-size: 1em;
+    color: map.get(variables.$colours, secondary);
+    background: map.get(variables.$colours, card-bg);
+    padding: 0.1rem 0.3rem;
+    border-radius: 5px;
+}
+
+.markdown-post :global(pre) {
+    overflow-x: auto;
+    padding: map.get(variables.$spacing, md);
+    margin: 0;
+    border: 3px solid map.get(variables.$colours, divider-light);
+    border-radius: 5px;
+}
+
+.markdown-post :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.markdown-post :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid map.get(variables.$colours, divider-light);
+  }
+</style>
