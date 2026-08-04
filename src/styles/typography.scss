@@ -1,6 +1,8 @@
 @use 'sass:map';
 @use 'sass:list';
+@use 'variables';
 
+// Imports & Definitions
 @function get-variation($map, $key) {
     $inner-map: map.get($map, $key);
     $result: ();
@@ -61,8 +63,91 @@ $font-variations-workbench: (
 // Typography - font families
 $fonts: (
   display: ('Workbench', sans-serif),
-  title: ('Instrument_Serif', serif),
+  heading: ('Instrument_Serif', serif),
   subtitle: ('Instrument_Serif', serif),
   body: ('Charis_SIL', serif),
   mono: ('VT323', monospace)
 );
+
+// Font styles
+
+.display {
+  font-family: map.get($fonts, display);
+  font-size: 2.5em;
+  color: map.get(variables.$colours, text-primary);
+  margin: 0;
+  line-height: 1.2;
+  @include font-variations-workbench("close");
+}
+
+.heading {
+  font-family: map.get($fonts, heading);
+  font-size: 2.5em;
+  color: map.get(variables.$colours, text-primary);
+  font-style: italic;
+  margin: 0 0 map.get(variables.$spacing, md) 0;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.subtitle {
+  font-family: map.get($fonts, body);
+  font-size: 0.75em;
+  color: map.get(variables.$colours, text-secondary);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.22px;
+}
+
+.body {
+  font-family: map.get($fonts, body);
+  font-size: 1em;
+  color: map.get(variables.$colours, text-primary);
+  line-height: 1.5;
+}
+
+.section-label {
+  font-family: map.get($fonts, subtitle);
+  font-size: 0.75rem;
+  color: map.get(variables.$colours, text-muted);
+  font-style: normal;
+  margin: map.get(variables.$spacing, md) 0 map.get(variables.$spacing, sm) 0;
+  font-weight: normal;
+  text-transform: title;
+}
+
+// Specific styles
+//// Name Title
+  .profile-name {
+    font-family: map.get($fonts, display);
+    font-size: 3.5em;
+    color: map.get(variables.$colours, text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .name-line1 {
+    display: block;
+    color: map.get(variables.$colours, accent);
+  }
+  .name-line2 {
+    display: block;
+    color: map.get(variables.$colours, secondary);
+  }
+//
+
+.bio-text {
+  font-family: map.get($fonts, body);
+  font-size: 0.75em;
+  color: map.get(variables.$colours, text-secondary);
+  line-height: 1.6;
+  margin: map.get(variables.$spacing, sm) 0;
+}
+
+.credit-text {
+  font-family: map.get($fonts, body);
+  font-size: 0.6em;
+  color: map.get(variables.$colours, text-muted);
+  line-height: 1.4;
+  margin-top: 100vh;
+  margin: map.get(variables.$spacing, sm) 0;
+}

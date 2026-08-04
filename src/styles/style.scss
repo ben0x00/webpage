@@ -169,75 +169,6 @@ body {
 .bottom-align {
   margin-top: 100vh;
 }
-// ===================================
-// LAYER 4: TYPOGRAPHY STYLES
-// ===================================
-
-// Profile name - left pane
-.profile-name {
-  font-family: map.get(typography.$fonts, display);
-  font-size: 52px;
-  color: map.get(variables.$colours, text-primary);
-  margin: 0;
-  line-height: 1.2;
-  @include typography.font-variations-workbench("close");
-}
-
-.name-line1 {
-  @include typography.font-variations-workbench(overexposed);
-  display: block;
-  color: map.get(variables.$colours, accent);
-}
-.name-line2 {
-  @include typography.font-variations-workbench("close");
-  display: block;
-  color: map.get(variables.$colours, secondary);
-}
-
-// Section labels (BIO, RECENT UPDATES, etc.)
-.section-label {
-  font-family: map.get(typography.$fonts, subtitle);
-  font-size: 0.75rem;
-
-  font-weight: normal;
-  color: map.get(variables.$colours, text-muted);
-  text-transform: title;
-  margin: map.get(variables.$spacing, md) 0 map.get(variables.$spacing, sm) 0;
-}
-
-// Tagline text
-.subtitle-text {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 11px;
-  color: map.get(variables.$colours, text-secondary);
-  margin: 0;
-  line-height: 1.4;
-  letter-spacing: 0.22px;
-}
-
-// Bio text
-.bio-text {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 11.5px;
-  color: map.get(variables.$colours, text-secondary);
-  line-height: 1.6;
-  margin: map.get(variables.$spacing, sm) 0;
-}
-
-//Credit text
-.credit-text {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 10px;
-  color: map.get(variables.$colours, text-muted);
-  line-height: 1.4;
-  margin-top: 100vh;
-  margin: map.get(variables.$spacing, sm) 0;
-}
-
-// Right pane heading section
-.content-header {
-  margin-bottom: map.get(variables.$spacing, xl);
-}
 
 .eyebrow {
   font-family: map.get(typography.$fonts, body);
@@ -248,24 +179,8 @@ body {
   margin: 0 0 map.get(variables.$spacing, sm) 0;
 }
 
-.heading {
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  font-size: 32px;
-  color: map.get(variables.$colours, text-primary);
-  margin: 0 0 map.get(variables.$spacing, md) 0;
-  line-height: 1.3;
-  font-weight: normal;
-}
 
-.intro-text {
-  font-family: map.get(typography.$fonts, body);
-  font-size: 13px;
-  color: map.get(variables.$colours, text-secondary);
-  line-height: 1.6;
-  margin: map.get(variables.$spacing, md) 0 map.get(variables.$spacing, xl) 0;
-  max-width: 90%;
-}
+
 
 
 
