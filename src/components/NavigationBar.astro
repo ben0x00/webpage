@@ -1,19 +1,20 @@
 ---
+const currentPath = Astro.url.pathname;
 ---
 <footer id="page-footer">
     <nav id="navigation-bar">
-        <div id="div-navigation-links" style="display: grid; grid-template-columns: repeat(2, 1fr);">
-            <ul>
-                <li> 1 </li>
-                <li> 2 </li>
+        <div id="div-navigation-links">
+            <ul class="nav-links">
+                <li>1</li>
+                <li>2</li>
             </ul>
         </div>
 
         <div id="div-navigation-buttons">
-            <ul>
-                <a href="/"> Home </a>
-                <a href="/projects"> Projects </a>
-                <a href="/posts"> Posts </a>
+            <ul class="nav-buttons">
+                <li><a class={currentPath==='/' ? 'is-active' : '' } href="/">Home</a></li>
+                <li><a class={currentPath==='/projects' ? 'is-active' : '' } href="/projects">Projects</a></li>
+                <li><a class={currentPath==='/posts' ? 'is-active' : '' } href="/posts">Posts</a></li>
             </ul>
         </div>
     </nav>
@@ -35,30 +36,65 @@
     #navigation-bar {
         display: grid;
         grid-template-columns: 0.75fr 1fr;
-        grid-template-rows: 1fr;
+        align-items: center;
         padding: map.get(variables.$spacing, md);
 
-        ul {
-            display: grid;
-            grid-auto-flow: column;
-            list-style-type: none;
+        #div-navigation-links, #div-navigation-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links,
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            list-style: none;
             margin: 0;
             padding: 0;
-            font-family: map.get(typography.$fonts, mono);
+        }
+
+        .nav-links {
+            gap: .75rem;
+        }
+
+        .nav-buttons {
+            justify-content: center;
+            gap: .75rem;
+        }
+
+        .nav-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .5rem 1rem;
+
+            border: 2px dashed map.get(variables.$colours, accent);
+            border-radius: 5px;
+            background: map.get(variables.$colours, bg-pane-right);
             color: map.get(variables.$colours, accent);
+
+            font-family: map.get(typography.$fonts, mono);
+            text-decoration: none;
+
+            transition: background 0.3s ease, color 0.1s linear, border-color 0.25s ease, transform 0.2s ease;
+        }
+        
+        .nav-buttons a.is-active {
+            background: map.get(variables.$colours, accent);
+            color: map.get(variables.$colours, bg-main);
+            border-style: solid;
+            border-color: map.get(variables.$colours, secondary);
         }
 
-        #div-navigation-links {
-            grid-column: 1;
-            grid-row: 1;
-            align-self: start;
+        .nav-buttons a:hover {
+            transform: translateY(1.5px);
         }
 
-        #div-navigation-buttons {
-            grid-column: 2;
-            text-align: center;
-            align-self: center;
-            margin: 0;
+        .nav-buttons a:not(.is-active):hover {
+            background: rgb(0, 0, 0, 0.05);
+            border-style: solid;
+            transform: translateY(1.5px);
         }
     }
 </style>
