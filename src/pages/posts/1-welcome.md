@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/PostLayout.astro
+layout: ../../layouts/BaseLayout.astro
 title: Welcome!
 pubDate: 17/07/2026
 updateDate: 17/07/2026

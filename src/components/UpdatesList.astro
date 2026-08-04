@@ -10,7 +10,7 @@ const {
 <section class="profile-updates">
     <h2 class="section-label">{title}</h2>
     <div class="updates-list">
-        {updates.map((update) => (
+        {updates.map((update: { date: string; tag: string; message: string }) => (
             <div class="update-item">
                 <span class="update-date">{update.date}</span>
                 <span class="update-tag">{update.tag}</span>

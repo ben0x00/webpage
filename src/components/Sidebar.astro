@@ -1,7 +1,9 @@
 ---
-const { name = {first: "Ben", last: "Toon"}, 
-bioText = "Bio bio bio text",
-taglineTexts = ["CS - Lancaster"]} = Astro.props;
+const {
+    name = { first: "Ben", last: "Toon" },
+    bioText = "Bio bio bio text",
+    taglineTexts = ["CS - Lancaster"],
+} = Astro.props;
 ---
 
 <section class="content-left">
@@ -13,7 +15,7 @@ taglineTexts = ["CS - Lancaster"]} = Astro.props;
     </header>
 
     <div class="profile-tagline">
-        {taglineTexts.map((any) => <p class="tagline-text">{ any }</p>)}
+        {taglineTexts.map((tagline: string) => <p class="tagline-text">{tagline}</p>)}
     </div>
 
     <div class="divider-thin"></div>

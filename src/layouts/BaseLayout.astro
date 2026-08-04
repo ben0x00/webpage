@@ -1,14 +1,15 @@
 ---
 // Global styles
 import '../styles/style.scss';
-import '../styles/variables.scss'
-import '../styles/typography.scss'
-// Components
-import Sidebar from '../components/Sidebar.astro'
-import Contents from '../components/Contents.astro'
-import NavigationBar from '../components/NavigationBar.astro'
-// Attributes
-const { titleText } = Astro.props;
+import '../styles/variables.scss';
+import '../styles/typography.scss';
+
+import Sidebar from '../components/Sidebar.astro';
+import HeadingBox from '../components/HeadingBox.astro';
+import NavigationBar from '../components/NavigationBar.astro';
+
+const { titleText, frontmatter } = Astro.props;
+const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
 ---
 
 <!DOCTYPE html>
@@ -16,29 +17,34 @@ const { titleText } = Astro.props;
 
 <head>
     <meta charset="UTF-8">
-    <title>Ben's Site</title>
-    <link rel="stylesheet" href="workbench-font.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{heading}</title>
 </head>
 
-
 <body>
-
     <main id="app-container">
         <section id="page-main">
-
             <Sidebar />
 
-            <Contents titleText = { titleText }>
-                <slot/>
-            </Contents>
+            <section class="content-right">
+                <div class="content-right-container">
 
+                    <HeadingBox
+                        heading={heading}
+                        frontmatter={frontmatter}
+                    />
+
+                    <slot />
+
+
+                </div>
+            </section>
         </section>
-
+        
         <NavigationBar />
 
     </main>
 
 </body>
-
 
 </html>

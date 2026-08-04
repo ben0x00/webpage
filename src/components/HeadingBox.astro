@@ -1,0 +1,13 @@
+---
+// Displays heading, and optional frontmatter post info
+const { heading, frontmatter } = Astro.props;
+---
+
+<div class="content-header">
+    <h1 class="heading">{ heading }</h1>
+    {frontmatter?.description && <p class="body-text">{frontmatter.description}</p>}
+    {frontmatter?.pubDate && <p class="subtitle-text">Posted {frontmatter.pubDate}</p>}
+    {frontmatter?.updateDate && <p class="subtitle-text">Updated {frontmatter.updateDate}</p>}
+    
+    <div class="accent-rule"></div>
+</div>
