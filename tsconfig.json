@@ -1,5 +1,7 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
-}
+    "name": "worker-name",
+    "compatibility_date": "2026-08-04",
+    "assets": {
+      "directory": "./dist"
+    }
+  }

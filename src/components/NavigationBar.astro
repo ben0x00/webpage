@@ -5,8 +5,16 @@ const currentPath = Astro.url.pathname;
     <nav id="navigation-bar">
         <div id="div-navigation-links">
             <ul class="nav-links">
-                <li>1</li>
-                <li>2</li>
+                <li>
+                    <a class="btn" href="https://github.com/ben0x00">
+                        <img src="src/assets/github.svg" class="icon" />
+                    </a>
+                </li>
+                <li>
+                    <a class="btn" href="mailto:ben@ben0x00.com">
+                        <img src="src/assets/email.svg" class="icon" />
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -47,8 +55,7 @@ const currentPath = Astro.url.pathname;
             justify-content: center;
         }
 
-        #div-navigation-links {
-        }
+        #div-navigation-links {}
 
         #div-navigation-buttons {
             min-width: 265px;
@@ -64,8 +71,23 @@ const currentPath = Astro.url.pathname;
 
         .nav-links {
             justify-content: space-around;
-            margin: 0;
+            margin: 0 1.5rem 0;
             width: 100%;
+
+            a.btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+            }
+            .icon {
+                max-width: 20px;
+                justify-self: center;
+                padding: 0;
+                margin: 0;
+                color: map.get(variables.$colours, accent);
+            }
         }
 
         .nav-buttons {
@@ -79,7 +101,7 @@ const currentPath = Astro.url.pathname;
             padding: .5rem 1rem;
             border: 2px dashed map.get(variables.$colours, accent);
             border-radius: 5px;
-            background: map.get(variables.$colours, bg-pane-right);
+            background: transparent;
             color: map.get(variables.$colours, accent);
 
             font-family: map.get(typography.$fonts, mono);
@@ -100,15 +122,17 @@ const currentPath = Astro.url.pathname;
         }
 
         .nav-buttons a:not(.is-active):hover {
-            background: rgb(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.05);
             border-style: solid;
             transform: translateY(1.5px);
         }
     }
 
-    @media (max-width: 400px) { // Shrink links on small screens
-            #navigation-bar {
-                grid-template-columns: clamp(75px, 10vw, 170px) minmax(0, 1fr);
-            }
+    @media (max-width: 400px) {
+
+        // Shrink links on small screens
+        #navigation-bar {
+            grid-template-columns: clamp(75px, 10vw, 170px) minmax(0, 1fr);
         }
+    }
 </style>
