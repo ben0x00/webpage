@@ -2,7 +2,39 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout titleText="Projects">
-    <p>Work in progress!</p>
-    <p>Check back later for updates :)</p>
+<BaseLayout
+    titleText="Projects"
+    description="A collection of experiments and production work."
+>
+    <section class="project-notice">
+        <p class="body">
+            This section is work in progress. As I build and ship new work,
+            it will appear here.
+        </p>
+
+        <p class="project-cta">
+            Check back soon!
+        </p>
+    </section>
 </BaseLayout>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .project-notice {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, lg);
+    }
+
+    .project-cta {
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: map.get(variables.$spacing, md);
+    }
+</style>

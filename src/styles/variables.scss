@@ -1,23 +1,85 @@
+// Design tokens.
+//
+// Colours are CSS custom properties so `prefers-color-scheme` can swap them at
+// runtime. The SCSS map below only forwards `var(--...)` references, which keeps
+// every existing `map.get(variables.$colours, x)` call site working unchanged.
+
+:root {
+  color-scheme: light dark;
+
+  --colour-bg-main: #faf9f5;
+  --colour-bg-pane-left: #f4f2ee;
+  --colour-bg-pane-right: #fcfbf8;
+  --colour-text-primary: #1a1410;
+  --colour-text-secondary: #3d3228;
+  --colour-text-muted: #6b6152;
+  --colour-accent: #002bff;
+  --colour-secondary: #0300a8;
+  --colour-tertiary: #6a0ad6;
+  --colour-border-dark: #1a1410;
+  --colour-divider-light: rgba(26, 20, 16, 0.14);
+  --colour-card-bg: #edeae5;
+  --colour-shadow: rgba(26, 20, 16, 0.22);
+  --colour-hover-wash: rgba(26, 20, 16, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colour-bg-main: #181917;
+    --colour-bg-pane-left: #201f1c;
+    --colour-bg-pane-right: #1c1d1a;
+    --colour-text-primary: #f2eee6;
+    --colour-text-secondary: #d3cdc1;
+    --colour-text-muted: #9d968a;
+    --colour-accent: #7aa8ff;
+    --colour-secondary: #a8c2ff;
+    --colour-tertiary: #c39bff;
+    --colour-border-dark: #f2eee6;
+    --colour-divider-light: rgba(242, 238, 230, 0.18);
+    --colour-card-bg: #24231f;
+    --colour-shadow: rgba(0, 0, 0, 0.55);
+    --colour-hover-wash: rgba(242, 238, 230, 0.08);
+  }
+}
+
 $colours: (
-  bg-main: #faf9f5,                    // Warm cream - main background
-  bg-pane-left: #f4f2ee,               // Slightly warmer cream - left sidebar
-  bg-pane-right: #fcfbf8,              // Light off-white - right pane
-  text-primary: #1a1410,               // Dark brown - primary text
-  text-secondary: #3d3228,             // Warm brown - secondary text
-text-muted: #9a8f7e,                 // Taupe - labels and muted text
-  accent: #002bff,                     // Blue - UI accents, highlights
-  secondary: #0300A8,                  // Dark Blue - UI accents, highlights
-  tertiary: #7C0AFF,                  // Dark Blue - UI accents, highlights
-  border-dark: #1a1410,                // Dark brown - borders
-  divider-light: rgba(26, 20, 16, 0.12), // Subtle divider lines
-  card-bg: #edeae5,                    // Card background
+  bg-main: var(--colour-bg-main),
+  bg-pane-left: var(--colour-bg-pane-left),
+  bg-pane-right: var(--colour-bg-pane-right),
+  text-primary: var(--colour-text-primary),
+  text-secondary: var(--colour-text-secondary),
+  text-muted: var(--colour-text-muted),
+  accent: var(--colour-accent),
+  secondary: var(--colour-secondary),
+  tertiary: var(--colour-tertiary),
+  border-dark: var(--colour-border-dark),
+  divider-light: var(--colour-divider-light),
+  card-bg: var(--colour-card-bg),
+  shadow: var(--colour-shadow),
+  hover-wash: var(--colour-hover-wash),
 );
 
-// Spacing system - for consistency
 $spacing: (
+  2xs: 2px,
   xs: 4px,
   sm: 8px,
   md: 16px,
   lg: 24px,
   xl: 32px,
+  2xl: 48px,
+  3xl: 72px,
 );
+
+$radius: (
+  sm: 2px,
+  md: 6px,
+);
+
+$border: (
+  hairline: 1px,
+  regular: 2px,
+);
+
+// Hard offset shadow is the retro signature; reserved for cards and raised chrome.
+$shadow-offset: 4px;
+$shadow-offset-hover: 6px;

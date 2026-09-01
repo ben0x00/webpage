@@ -8,9 +8,14 @@ import Sidebar from '../components/Sidebar.astro';
 import HeadingBox from '../components/HeadingBox.astro';
 import NavigationBar from '../components/NavigationBar.astro';
 
-const { titleText, frontmatter } = Astro.props;
+const { titleText, description, frontmatter } = Astro.props;
 const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
 const isMarkdownPost = Boolean(frontmatter);
+
+const siteName = 'Ben Toon';
+const pageTitle = heading === siteName ? siteName : `${heading} — ${siteName}`;
+const pageDescription =
+    description ?? frontmatter?.description ?? 'Personal site of Ben Toon — writing, projects, and experiments.';
 ---
 
 <!DOCTYPE html>
@@ -19,7 +24,16 @@ const isMarkdownPost = Boolean(frontmatter);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{heading}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription}>
+    <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#181917" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="/favicon.ico" sizes="any">
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).href}>
+    <meta property="og:type" content={isMarkdownPost ? 'article' : 'website'}>
+    <meta property="og:title" content={pageTitle}>
+    <meta property="og:description" content={pageDescription}>
 </head>
 
 <body>
@@ -62,13 +76,10 @@ const isMarkdownPost = Boolean(frontmatter);
 @use '../styles/variables';
 
 .markdown-post {
-    display: flex;
-    flex-direction: column;
-    gap: map.get(variables.$spacing, md);
-    max-width: 42rem;
-    margin-top: map.get(variables.$spacing, lg);
-    padding-top: map.get(variables.$spacing, md);
-    border-top: 1px solid map.get(variables.$colours, divider-light);
+    font-family: map.get(typography.$fonts, body);
+    font-size: var(--step-0);
+    color: map.get(variables.$colours, text-primary);
+    line-height: 1.7;
 }
 
 .markdown-post :global(h1),
@@ -79,63 +90,97 @@ const isMarkdownPost = Boolean(frontmatter);
 .markdown-post :global(h6) {
     font-family: map.get(typography.$fonts, heading);
     color: map.get(variables.$colours, text-primary);
+    font-weight: normal;
+    line-height: 1.25;
+    margin: map.get(variables.$spacing, xl) 0 map.get(variables.$spacing, sm);
+}
+
+.markdown-post :global(h1) { font-size: var(--step-3); }
+.markdown-post :global(h2) { font-size: var(--step-2); }
+.markdown-post :global(h3) { font-size: var(--step-1); }
+
+// h4-h6 stop scaling and shift to mono, so deep nesting reads as labels.
+.markdown-post :global(h4),
+.markdown-post :global(h5),
+.markdown-post :global(h6) {
+    font-family: map.get(typography.$fonts, mono);
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: map.get(variables.$colours, text-muted);
+}
+
+.markdown-post :global(> :first-child) {
+    margin-top: 0;
 }
 
 .markdown-post :global(p) {
-    margin: 0;
+    margin: 0 0 map.get(variables.$spacing, md);
 }
 
 .markdown-post :global(ul),
 .markdown-post :global(ol) {
-    margin: 0;
-    padding-left: 1.4rem;
+    margin: 0 0 map.get(variables.$spacing, md);
+    padding-left: map.get(variables.$spacing, lg);
+}
+
+.markdown-post :global(li) {
+    margin-bottom: map.get(variables.$spacing, xs);
+}
+
+.markdown-post :global(li::marker) {
+    color: map.get(variables.$colours, text-muted);
 }
 
 .markdown-post :global(blockquote) {
-    margin: .2em 0em .5em 0em;
+    margin: map.get(variables.$spacing, lg) 0;
     padding-left: map.get(variables.$spacing, md);
-    border-left: 2px solid map.get(variables.$colours, accent);
-    border-radius: 2px;
-    color: map.get(variables.$colours, text-primary);
+    border-left: map.get(variables.$border, regular) solid map.get(variables.$colours, accent);
+    color: map.get(variables.$colours, text-secondary);
     font-style: italic;
 }
 
+.markdown-post :global(blockquote p:last-child) {
+    margin-bottom: 0;
+}
+
 .markdown-post :global(hr) {
-    width: 100%;
     border: 0;
-    border-top: 1px solid map.get(variables.$colours, divider-light);
-    border-radius: 2px;
-    margin: map.get(variables.$spacing, md) 0;
+    border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    margin: map.get(variables.$spacing, xl) 0;
 }
 
 .markdown-post :global(a) {
     color: map.get(variables.$colours, accent);
     text-underline-offset: 0.18em;
-    text-decoration: underline dashed blue;
+    text-decoration: underline dashed;
     transition: text-decoration-style 160ms ease;
 }
 
 .markdown-post :global(a:hover) {
-    color: map.get(variables.$colours, accent);
     text-decoration-style: solid;
 }
 
+.markdown-post :global(a:visited) {
+    color: map.get(variables.$colours, tertiary);
+}
 
 .markdown-post :global(code) {
     font-family: map.get(typography.$fonts, code);
-    font-size: 1em;
+    font-size: 0.9em;
     color: map.get(variables.$colours, secondary);
     background: map.get(variables.$colours, card-bg);
-    padding: 0.1rem 0.3rem;
-    border-radius: 5px;
+    padding: 0.1em 0.35em;
+    border-radius: map.get(variables.$radius, sm);
 }
 
 .markdown-post :global(pre) {
     overflow-x: auto;
     padding: map.get(variables.$spacing, md);
-    margin: 0;
-    border: 3px solid map.get(variables.$colours, divider-light);
-    border-radius: 5px;
+    margin: 0 0 map.get(variables.$spacing, md);
+    background: map.get(variables.$colours, card-bg);
+    border: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    border-radius: map.get(variables.$radius, md);
 }
 
 .markdown-post :global(pre code) {
@@ -148,7 +193,11 @@ const isMarkdownPost = Boolean(frontmatter);
     display: block;
     max-width: 100%;
     height: auto;
-    border-radius: 6px;
-    border: 1px solid map.get(variables.$colours, divider-light);
-  }
+    border-radius: map.get(variables.$radius, md);
+    border: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+}
+
+.markdown-post :global(strong) {
+    font-weight: 700;
+}
 </style>

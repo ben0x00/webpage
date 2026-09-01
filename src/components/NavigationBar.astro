@@ -1,30 +1,50 @@
 ---
 const currentPath = Astro.url.pathname;
----
-<footer id="page-footer">
-    <nav id="navigation-bar">
-        <div id="div-navigation-links">
-            <ul class="nav-links">
-                <li>
-                    <a class="btn" href="https://github.com/ben0x00">
-                        <img src="src/assets/github.svg" class="icon" />
-                    </a>
-                </li>
-                <li>
-                    <a class="btn" href="mailto:ben@ben0x00.com">
-                        <img src="src/assets/email.svg" class="icon" />
-                    </a>
-                </li>
-            </ul>
-        </div>
 
-        <div id="div-navigation-buttons">
-            <ul class="nav-buttons">
-                <li><a class={currentPath==='/' ? 'is-active' : '' } href="/">Home</a></li>
-                <li><a class={currentPath==='/projects' ? 'is-active' : '' } href="/projects">Projects</a></li>
-                <li><a class={currentPath==='/posts' ? 'is-active' : '' } href="/posts">Posts</a></li>
-            </ul>
-        </div>
+const pages = [
+    { href: '/', label: 'Home' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/posts', label: 'Posts' },
+];
+
+const isActive = (href: string) =>
+    href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<footer id="page-footer">
+    <nav id="navigation-bar" aria-label="Primary">
+        <ul class="nav-links">
+            <li>
+                <a class="btn" href="https://github.com/ben0x00" aria-label="GitHub profile" rel="me noopener">
+                    <svg class="icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="mailto:ben@ben0x00.com" aria-label="Email me">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                        <path
+                            d="M3 8L8.44992 11.6333C9.73295 12.4886 10.3745 12.9163 11.0678 13.0825C11.6806 13.2293 12.3194 13.2293 12.9322 13.0825C13.6255 12.9163 14.2671 12.4886 15.5501 11.6333L21 8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav-buttons">
+            {pages.map((page) => (
+                <li>
+                    <a
+                        href={page.href}
+                        class:list={['nav-button', { 'is-active': isActive(page.href) }]}
+                        aria-current={isActive(page.href) ? 'page' : undefined}
+                    >
+                        {page.label}
+                    </a>
+                </li>
+            ))}
+        </ul>
     </nav>
 </footer>
 
@@ -34,105 +54,97 @@ const currentPath = Astro.url.pathname;
     @use '../styles/variables';
 
     #page-footer {
+        position: sticky;
+        bottom: 0;
         grid-row: 2;
         grid-column: 1;
-        border-top: 2px solid map.get(variables.$colours, border-dark);
-        background-color: map.get(variables.$colours, bg-main);
-        z-index: 1;
+        border-top: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
+        background-color: map.get(variables.$colours, bg-pane-left);
+        z-index: 999;
     }
 
     #navigation-bar {
-        display: grid;
-
-        grid-template-columns: clamp(170px, 24vw, 240px) minmax(0, 1fr);
-
-
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-
-        #div-navigation-links,
-        #div-navigation-buttons {
-            display: flex;
-            justify-content: center;
-        }
-
-        #div-navigation-links {}
-
-        #div-navigation-buttons {
-            min-width: 265px;
-        }
-
-        .nav-links,
-        .nav-buttons {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin: .75rem;
-        }
-
-        .nav-links {
-            justify-content: space-around;
-            margin: 0 1.5rem 0;
-            width: 100%;
-
-            a.btn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 0;
-                margin: 0;
-            }
-            .icon {
-                max-width: 20px;
-                justify-self: center;
-                padding: 0;
-                margin: 0;
-                color: map.get(variables.$colours, accent);
-            }
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            gap: .75rem;
-        }
-
-        .nav-buttons a {
-            padding: .5rem 1rem;
-            border: 2px dashed map.get(variables.$colours, accent);
-            border-radius: 5px;
-            background: transparent;
-            color: map.get(variables.$colours, accent);
-
-            font-family: map.get(typography.$fonts, mono);
-            text-decoration: none;
-
-            transition: background 0.3s ease, color 0.1s linear, border-color 0.25s ease, transform 0.2s ease;
-        }
-
-        .nav-buttons a.is-active {
-            background: map.get(variables.$colours, accent);
-            color: map.get(variables.$colours, bg-main);
-            border-style: solid;
-            border-color: map.get(variables.$colours, secondary);
-        }
-
-        .nav-buttons a:hover {
-            transform: translateY(1.5px);
-        }
-
-        .nav-buttons a:not(.is-active):hover {
-            background: rgba(0, 0, 0, 0.05);
-            border-style: solid;
-            transform: translateY(1.5px);
-        }
+        gap: map.get(variables.$spacing, md);
+        padding: map.get(variables.$spacing, sm) map.get(variables.$spacing, lg);
     }
 
-    @media (max-width: 400px) {
+    ul {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-        // Shrink links on small screens
+    .nav-links {
+        gap: map.get(variables.$spacing, sm);
+    }
+
+    .nav-buttons {
+        gap: map.get(variables.$spacing, sm);
+        flex-wrap: wrap;
+        margin-inline-start: auto;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: map.get(variables.$spacing, sm);
+        border-radius: map.get(variables.$radius, sm);
+        color: map.get(variables.$colours, text-secondary);
+        transition: color 160ms ease;
+    }
+
+    .btn:hover {
+        color: map.get(variables.$colours, accent);
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        display: block;
+    }
+
+    .nav-button {
+        display: inline-block;
+        padding: map.get(variables.$spacing, xs) map.get(variables.$spacing, md);
+        border: map.get(variables.$border, regular) dashed map.get(variables.$colours, accent);
+        border-radius: map.get(variables.$radius, sm);
+        background: transparent;
+        color: map.get(variables.$colours, accent);
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step-1);
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        text-decoration: none;
+        transition: background 200ms ease, border-color 200ms ease;
+    }
+
+    .nav-button:hover {
+        background: map.get(variables.$colours, hover-wash);
+        border-style: solid;
+    }
+
+    .nav-button.is-active {
+        background: map.get(variables.$colours, accent);
+        color: map.get(variables.$colours, bg-main);
+        border-style: solid;
+    }
+
+    @media (max-width: 30rem) {
         #navigation-bar {
-            grid-template-columns: clamp(75px, 10vw, 170px) minmax(0, 1fr);
+            justify-content: center;
+            padding-inline: map.get(variables.$spacing, md);
+        }
+
+        .nav-buttons {
+            margin-inline-start: 0;
+            justify-content: center;
+            width: 100%;
         }
     }
 </style>

@@ -1,31 +1,109 @@
 ---
 const {
-    name = { first: "Ben", last: "Toon" },
-    bioText = "Bio bio bio text",
-    taglineTexts = ["CS - Lancaster"],
+    name = { first: 'Ben', last: 'Toon' },
+    bioText = 'Bio bio bio text',
+    taglineTexts = ['CS — Lancaster'],
 } = Astro.props;
 ---
 
-<section class="content-left">
-    <header class="profile-header">
-        <h1 class="profile-name">
-            <span class="name-line1">{name.first}</span>
-            <span class="name-line2">{name.last}</span>
-        </h1>
-    </header>
+<aside class="content-left">
+    <div class="profile-header">
+        <div class="profile-name">
+            <span class="name-line1" style="color: var(--colour-accent)">{name.first}</span>
+            <span class="name-line2" style="color: var(--colour-secondary)">{name.last}</span>
+        </div>
 
-    <div class="profile-tagline">
-        {taglineTexts.map((tagline: string) => <p class="tagline-text">{tagline}</p>)}
+        <div class="profile-tagline">
+            {taglineTexts.map((tagline: string, i: number) => (
+                <p class="tagline-text" data-index={i}>{tagline}</p>
+            ))}
+        </div>
     </div>
 
     <div class="divider-thin"></div>
 
     <section class="profile-bio">
-        <h2 class="section-label">BIO</h2>
-        <p class="bio-text"> { bioText } </p>
+        <h2 class="section-label">Bio</h2>
+        <p class="bio-text">{bioText}</p>
     </section>
 
-    <div class="divider-thin"></div>
+    <p class="credit-text">Designed &amp; built by me</p>
+</aside>
 
-    <div class="credit-text">Designed and programmed myself ❤️</div>
-</section>
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, sm);
+    }
+
+    .profile-name {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, 2xs);
+    }
+
+    .name-line1 {
+        font-family: map.get(typography.$fonts, display);
+        font-size: var(--step-3);
+        color: var(--colour-accent);
+        line-height: 1.1;
+        margin: 0;
+    }
+
+    .name-line2 {
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step-0);
+        color: var(--colour-secondary);
+        letter-spacing: 0.04em;
+        margin: 0 0 map.get(variables.$spacing, xs) 0;
+    }
+
+    .profile-tagline {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, 2xs);
+    }
+
+    .tagline-text {
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, text-muted);
+        letter-spacing: 0.04em;
+        margin: 0;
+    }
+
+    .profile-bio {
+        padding-top: map.get(variables.$spacing, lg);
+        border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    }
+
+    // Pinned to the bottom of the rail on desktop; inline on mobile.
+    .credit-text {
+        margin: auto 0 0;
+        padding-top: map.get(variables.$spacing, lg);
+        border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    }
+
+    @media (max-width: 48rem) {
+        .profile-header {
+            flex-direction: column;
+            gap: map.get(variables.$spacing, sm);
+        }
+
+        .profile-name {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            gap: map.get(variables.$spacing, 2xs);
+        }
+
+        .credit-text {
+            display: none;
+        }
+    }
+</style>

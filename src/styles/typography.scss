@@ -15,6 +15,7 @@
 @font-face {
   font-family: 'Workbench';
   src: url('../fonts/Workbench.ttf');
+  font-display: swap;
 }
 
 $font-variations-workbench: (
@@ -34,33 +35,48 @@ $font-variations-workbench: (
 @font-face {
   font-family: 'VT323';
   src: url('../fonts/VT323.ttf');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Tagesschrift';
   src: url('../fonts/Tagesschrift.ttf');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Instrument_Serif';
-    src: url('../fonts/InstrumentSerif-Regular.ttf');
-  }
+  src: url('../fonts/InstrumentSerif-Regular.ttf');
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
-  font-family: 'Instrument_Serif_Italic';
-    src: url('../fonts/InstrumentSerif-Italic.ttf');
-  }
+  font-family: 'Instrument_Serif';
+  src: url('../fonts/InstrumentSerif-Italic.ttf');
+  font-style: italic;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Charis_SIL';
   src: url('../fonts/CharisSIL-Regular.ttf');
-}
-@font-face {
-    font-family: 'Charis_SIL_Bold';
-    src: url('../fonts/CharisSIL-Bold.ttf');
+  font-weight: 400;
+  font-display: swap;
 }
 
-// Typography - font families
+@font-face {
+  font-family: 'Charis_SIL';
+  src: url('../fonts/CharisSIL-Bold.ttf');
+  font-weight: 700;
+  font-display: swap;
+}
+
+// Font rationing. Each family has exactly one job; do not mix them.
+//   display -> the name lockup only
+//   heading -> page/post headings
+//   body    -> every reading surface
+//   mono    -> metadata and chrome only (dates, tags, nav, eyebrows)
 $fonts: (
   display: ('Workbench', sans-serif),
   heading: ('Instrument_Serif', serif),
@@ -70,85 +86,95 @@ $fonts: (
   code: ('IBM Plex Mono', monospace)
 );
 
+// Modular type scale, 16px base. Never hand-write a font-size outside this.
+:root {
+  --step--2: 0.75rem;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: clamp(1.35rem, 1.2rem + 0.7vw, 1.65rem);
+  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.35rem);
+  --step-4: clamp(2.25rem, 1.8rem + 2.2vw, 3.25rem);
+}
+
 // Font styles
 
 .display {
   font-family: map.get($fonts, display);
-  font-size: 2.5em;
+  font-size: var(--step-4);
   color: map.get(variables.$colours, text-primary);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.15;
   @include font-variations-workbench("close");
 }
 
 .heading {
   font-family: map.get($fonts, heading);
-  font-size: 2.5em;
+  font-size: var(--step-3);
   color: map.get(variables.$colours, text-primary);
   font-style: italic;
-  margin: 0 0 map.get(variables.$spacing, md) 0;
-  line-height: 1.3;
+  margin: 0;
+  line-height: 1.2;
   font-weight: normal;
 }
 
 .subtitle {
-  font-family: map.get($fonts, body);
-  font-size: 0.75em;
-  color: map.get(variables.$colours, text-secondary);
+  font-family: map.get($fonts, mono);
+  font-size: var(--step--1);
+  color: map.get(variables.$colours, text-muted);
   margin: 0;
   line-height: 1.4;
-  letter-spacing: 0.22px;
+  letter-spacing: 0.04em;
 }
 
 .body {
   font-family: map.get($fonts, body);
-  font-size: 1em;
+  font-size: var(--step-0);
   color: map.get(variables.$colours, text-primary);
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
+// Mono section headers: the retro chrome that frames serif reading surfaces.
 .section-label {
-  font-family: map.get($fonts, subtitle);
-  font-size: 0.75rem;
+  font-family: map.get($fonts, mono);
+  font-size: var(--step--1);
   color: map.get(variables.$colours, text-muted);
-  font-style: normal;
-  margin: map.get(variables.$spacing, md) 0 map.get(variables.$spacing, sm) 0;
+  margin: 0 0 map.get(variables.$spacing, sm) 0;
   font-weight: normal;
-  text-transform: title;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-// Specific styles
-//// Name Title
-  .profile-name {
-    font-family: map.get($fonts, display);
-    font-size: 3.5em;
-    color: map.get(variables.$colours, text-primary);
-    margin: 0;
-    line-height: 1.2;
-  }
-  .name-line1 {
-    display: block;
-    color: map.get(variables.$colours, accent);
-  }
-  .name-line2 {
-    display: block;
-    color: map.get(variables.$colours, secondary);
-  }
-//
+.profile-name {
+  font-family: map.get($fonts, display);
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  margin: 0;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.name-line1 {
+  display: block;
+  color: map.get(variables.$colours, accent);
+}
+
+.name-line2 {
+  display: block;
+  color: map.get(variables.$colours, secondary);
+}
 
 .bio-text {
   font-family: map.get($fonts, body);
-  font-size: 0.75em;
+  font-size: var(--step--1);
   color: map.get(variables.$colours, text-secondary);
   line-height: 1.6;
-  margin: map.get(variables.$spacing, sm) 0;
+  margin: 0;
 }
 
 .credit-text {
-  font-family: map.get($fonts, body);
-  font-size: 0.6em;
+  font-family: map.get($fonts, mono);
+  font-size: var(--step--2);
   color: map.get(variables.$colours, text-muted);
   line-height: 1.4;
-  margin-top: 100vh;
-  margin: map.get(variables.$spacing, sm) 0;
+  letter-spacing: 0.03em;
 }

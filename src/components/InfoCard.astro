@@ -1,45 +1,71 @@
 ---
-const {label="Placeholder", content="Placeholder", link=""} = Astro.props;
+const { label = 'Placeholder', content = 'Placeholder', link } = Astro.props;
+
+const Tag = link ? 'a' : 'div';
+const isExternal = typeof link === 'string' && /^https?:/.test(link);
 ---
 
-<a class="info-card" href={link} >
+<Tag
+    class:list={['info-card', { 'is-link': Boolean(link) }]}
+    href={link || undefined}
+    rel={isExternal ? 'noopener' : undefined}
+>
     <p class="card-label">{label}</p>
     <p class="card-value">{content}</p>
-</a>
+    {link && <span class="card-arrow" aria-hidden="true">&rarr;</span>}
+</Tag>
 
 <style lang="scss">
-@use 'sass:map';
-@use '../styles/typography';
-@use '../styles/variables';
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
 
-    .info-card{
-    background-color: map.get(variables.$colours, card-bg);
-    border: 1.5px solid map.get(variables.$colours, border-dark);
-    border-radius: 5px;
-    padding: map.get(variables.$spacing, md);
-    box-shadow: 4px 4px 0px rgba(26, 20, 16, 0.18);
-    text-decoration: none;
-    
-    &:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 6px 6px 0px rgba(26, 20, 16, 0.25);
-        transition: all 0.2s ease;
+    .info-card {
+        display: block;
+        position: relative;
+        background-color: map.get(variables.$colours, card-bg);
+        border: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
+        border-radius: map.get(variables.$radius, md);
+        padding: map.get(variables.$spacing, md);
+        box-shadow: variables.$shadow-offset variables.$shadow-offset 0 map.get(variables.$colours, shadow);
+        text-decoration: none;
+        color: inherit;
     }
+
+    .is-link {
+        transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .is-link:hover,
+    .is-link:focus-visible {
+        transform: translate(-2px, -2px);
+        box-shadow: variables.$shadow-offset-hover variables.$shadow-offset-hover 0
+            map.get(variables.$colours, shadow);
     }
 
     .card-label {
-    font-family: map.get(typography.$fonts, subtitle);
-    font-size: .75rem;
-    font-weight: bold;
-    color: map.get(variables.$colours, text-muted);
-    margin: 0 0 map.get(variables.$spacing, sm) 0;
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step--1);
+        color: map.get(variables.$colours, text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 0 0 map.get(variables.$spacing, xs) 0;
     }
 
     .card-value {
-    font-family: map.get(typography.$fonts, body);
-    font-size: 12px;
-    font-weight: 600;
-    color: map.get(variables.$colours, text-primary);
-    margin: 0;
+        font-family: map.get(typography.$fonts, body);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, text-primary);
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .card-arrow {
+        position: absolute;
+        top: map.get(variables.$spacing, md);
+        right: map.get(variables.$spacing, md);
+        font-family: map.get(typography.$fonts, mono);
+        color: map.get(variables.$colours, accent);
+        line-height: 1;
     }
 </style>

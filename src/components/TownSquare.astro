@@ -1,12 +1,18 @@
 ---
+const {
+    title = 'Town square',
+    caption = 'Everyone reading this page right now. Move around with the arrow keys.',
+} = Astro.props;
 ---
-<style>
-    div {
-        padding: 15;
-    }
-</style>
 
-<div id="townsquare-root"></div>
+<section class="townsquare">
+    <h2 class="section-label">{title}</h2>
+    <div class="townsquare__frame">
+        <div id="townsquare-root"></div>
+    </div>
+    <p class="townsquare__caption">{caption}</p>
+</section>
+
 <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css" />
 <script type="module">
     import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
@@ -18,3 +24,24 @@
         theme: "host"
     });
 </script>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .townsquare__frame {
+        border: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
+        border-radius: map.get(variables.$radius, md);
+        box-shadow: variables.$shadow-offset variables.$shadow-offset 0 map.get(variables.$colours, shadow);
+        overflow: hidden;
+    }
+
+    .townsquare__caption {
+        font-family: map.get(typography.$fonts, body);
+        font-size: var(--step--1);
+        color: map.get(variables.$colours, text-muted);
+        line-height: 1.5;
+        margin: map.get(variables.$spacing, sm) 0 0;
+    }
+</style>

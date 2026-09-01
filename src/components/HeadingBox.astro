@@ -1,13 +1,46 @@
 ---
 // Displays heading, and optional frontmatter post info
 const { heading, frontmatter } = Astro.props;
+
+const dates = [
+    frontmatter?.pubDate && `Posted ${frontmatter.pubDate}`,
+    frontmatter?.updateDate && `Updated ${frontmatter.updateDate}`,
+].filter(Boolean);
 ---
 
-<div class="content-header">
-    <h1 class="heading">{ heading }</h1>
-    {frontmatter?.description && <p class="body-text">{frontmatter.description}</p>}
-    {frontmatter?.pubDate && <p class="subtitle-text">Posted {frontmatter.pubDate}</p>}
-    {frontmatter?.updateDate && <p class="subtitle-text">Updated {frontmatter.updateDate}</p>}
-    
+<header class="content-header">
+    <h1 class="heading">{heading}</h1>
+
+    {frontmatter?.description && <p class="lede">{frontmatter.description}</p>}
+
+    {dates.length > 0 && (
+        <p class="subtitle post-dates">{dates.join(' · ')}</p>
+    )}
+
     <div class="accent-rule"></div>
-</div>
+</header>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .content-header {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, sm);
+        margin-bottom: map.get(variables.$spacing, xl);
+    }
+
+    .lede {
+        font-family: map.get(typography.$fonts, body);
+        font-size: var(--step-1);
+        color: map.get(variables.$colours, text-secondary);
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    .post-dates {
+        margin: 0;
+    }
+</style>
