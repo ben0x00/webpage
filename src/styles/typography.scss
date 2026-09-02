@@ -106,13 +106,14 @@ $fonts: (
   margin: 0;
   line-height: 1.15;
   @include font-variations-workbench("close");
+  @include font-variations-workbench("touching");
 }
 
 .heading {
   font-family: map.get($fonts, heading);
   font-size: var(--step-3);
   color: map.get(variables.$colours, text-primary);
-  font-style: italic;
+  font-style: normal;
   margin: 0;
   line-height: 1.2;
   font-weight: normal;

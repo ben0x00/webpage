@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/BaseLayout.astro
-title: Welcome!
+title: Welcome to my website
 pubDate: 17/07/2026
 updateDate: 17/07/2026
-description: Hello and welcome to my website.
+description: The first post of my new portfolio
 topics: ["general"]
 ---
 

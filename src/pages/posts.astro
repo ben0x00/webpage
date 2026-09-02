@@ -62,11 +62,8 @@ const sorted = posts.sort(
     }
 
     .post-title {
-        font-family: map.get(typography.$fonts, heading);
+        @extend .subtitle;
         font-size: var(--step-2);
-        font-style: italic;
-        color: map.get(variables.$colours, text-primary);
-        line-height: 1.2;
     }
 
     .post-link:hover .post-title {
