@@ -6,9 +6,9 @@ import UpdatesList from '../components/UpdatesList.astro'
 
 const updates = [
 {
-date: 'Apr 29 2026',
+date: ' 2026',
 tag: 'Website',
-message: 'Redesign launch???',
+message: 'Created new webpage.',
 },
 ];
 ---
@@ -23,17 +23,25 @@ message: 'Redesign launch???',
             will be showcased here.
         </p>
 
-        <section>
-            <UpdatesList title="Recent updates" updates={updates} />
-        </section>
+        <hr class="divider-thin" />
 
         <section>
             <h2 class="section-label">Elsewhere</h2>
             <div class="info-cards-grid">
-                <InfoCard label="GitHub" content="Code and side projects" link="https://github.com/ben0x00" />
+                <InfoCard label="GitHub" content="View code and side projects" link="https://github.com/ben0x00" />
                 <InfoCard label="Email" content="ben@ben0x00.com" link="mailto:ben@ben0x00.com" />
+                <InfoCard label="Projects" content="Go to my projects page" link="/projects" />
+                <InfoCard label="More Links" content="View all links..." link="/links" />
             </div>
         </section>
+
+        <hr class="divider-thin" />
+
+        <section>
+            <UpdatesList title="Recent updates" updates={updates} />
+        </section>
+
+        
 
         <TownSquare />
     </div>

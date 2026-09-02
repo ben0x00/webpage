@@ -1,16 +1,21 @@
 ---
 const {
     name = { first: 'Ben', last: 'Toon' },
-    bioText = 'Bio bio bio text',
-    taglineTexts = ['CS — Lancaster'],
+    bioText = 
+    'I\'m a second-year Computer Science student at Lancaster University. \n I\'m interested in all of computing, technology, science, and philosophy. Feel free to reach out to me via email or GitHub if you\'d like to get in touch :)',
+    taglineTexts = ['Computer Science — Lancaster University / Bedfordshire'],
 } = Astro.props;
 ---
 
 <aside class="content-left">
     <div class="profile-header">
         <div class="profile-name">
-            <span class="name-line1" style="color: var(--colour-accent)">{name.first}</span>
-            <span class="name-line2" style="color: var(--colour-secondary)">{name.last}</span>
+            <a class="name-line1" style="color: var(--colour-accent)" href="/">
+                {name.first}
+            </a>
+            <a class="name-line2" style="color: var(--colour-secondary)" href="/">
+                {name.last}
+            </a>
         </div>
 
         <div class="profile-tagline">
@@ -20,12 +25,14 @@ const {
         </div>
     </div>
 
-    <div class="divider-thin"></div>
+    <hr class="divider-thin" />
 
     <section class="profile-bio">
         <h2 class="section-label">Bio</h2>
         <p class="bio-text">{bioText}</p>
     </section>
+
+    <hr class="divider-thin" />
 
     <p class="credit-text">Designed &amp; built by me</p>
 </aside>
@@ -43,24 +50,26 @@ const {
 
     .profile-name {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: map.get(variables.$spacing, 2xs);
+        margin: map.get(variables.$spacing, 2xs) 0 0;
+        line-height: 1.25em;
     }
 
     .name-line1 {
         font-family: map.get(typography.$fonts, display);
-        font-size: var(--step-3);
+        font-size: var(--step-4);
+        text-decoration: none;
         color: var(--colour-accent);
-        line-height: 1.1;
         margin: 0;
     }
 
     .name-line2 {
-        font-family: map.get(typography.$fonts, mono);
-        font-size: var(--step-0);
+        font-family: map.get(typography.$fonts, display);
+        font-size: var(--step-4);
+        text-decoration: none;
         color: var(--colour-secondary);
         letter-spacing: 0.04em;
-        margin: 0 0 map.get(variables.$spacing, xs) 0;
     }
 
     .profile-tagline {
@@ -79,14 +88,13 @@ const {
 
     .profile-bio {
         padding-top: map.get(variables.$spacing, lg);
-        border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
     }
 
     // Pinned to the bottom of the rail on desktop; inline on mobile.
     .credit-text {
         margin: auto 0 0;
         padding-top: map.get(variables.$spacing, lg);
-        border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+
     }
 
     @media (max-width: 48rem) {

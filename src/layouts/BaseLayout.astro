@@ -12,8 +12,12 @@ const { titleText, description, frontmatter } = Astro.props;
 const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
 const isMarkdownPost = Boolean(frontmatter);
 
+// Use static paths for favicons to ensure correct rendering
+const faviconSvgSrc = '/favicon.svg';
+const faviconPngSrc = '/favicon.png';
+
 const siteName = 'Ben Toon';
-const pageTitle = heading === siteName ? siteName : `${heading} — ${siteName}`;
+const pageTitle = heading === siteName ? siteName : `${heading} : ${siteName}`;
 const pageDescription =
     description ?? frontmatter?.description ?? 'Personal site of Ben Toon — writing, projects, and experiments.';
 ---
@@ -28,8 +32,10 @@ const pageDescription =
     <meta name="description" content={pageDescription}>
     <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#181917" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="alternate icon" href="/favicon.ico" sizes="any">
+    
+    <link rel="icon" href={faviconSvgSrc} type="image/svg+xml">
+    <link rel="icon" href={faviconPngSrc} type="image/png">
+    <link rel="shortcut icon" href={faviconPngSrc} type="image/png">
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).href}>
     <meta property="og:type" content={isMarkdownPost ? 'article' : 'website'}>
     <meta property="og:title" content={pageTitle}>
@@ -55,6 +61,7 @@ const pageDescription =
                         </article>
                     ) : (
                         <slot />
+                        <a href="javascript:history.back()" class="subtitle"> <- Go Back </a>
                     )}
 
 
@@ -199,5 +206,15 @@ const pageDescription =
 
 .markdown-post :global(strong) {
     font-weight: 700;
+}
+
+/* Pin the left sidebar so it stays visible while scrolling */
+.content-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    /* prevent the sidebar from shrinking */
+    flex-shrink: 0;
 }
 </style>
