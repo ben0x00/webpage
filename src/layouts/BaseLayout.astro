@@ -12,9 +12,7 @@ const { titleText, description, frontmatter } = Astro.props;
 const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
 const isMarkdownPost = Boolean(frontmatter);
 
-// Use static paths for favicons to ensure correct rendering
-const faviconSvgSrc = '/favicon.svg';
-const faviconPngSrc = '/favicon.png';
+const faviconSrc = '/favicon.png';
 
 const siteName = 'Ben Toon';
 const pageTitle = heading === siteName ? siteName : `${heading} : ${siteName}`;
@@ -33,9 +31,7 @@ const pageDescription =
     <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#181917" media="(prefers-color-scheme: dark)">
     
-    <link rel="icon" href={faviconSvgSrc} type="image/svg+xml">
-    <link rel="icon" href={faviconPngSrc} type="image/png">
-    <link rel="shortcut icon" href={faviconPngSrc} type="image/png">
+    <link rel="icon" href={faviconSrc} type="image/png">
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).href}>
     <meta property="og:type" content={isMarkdownPost ? 'article' : 'website'}>
     <meta property="og:title" content={pageTitle}>
