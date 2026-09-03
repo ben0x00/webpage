@@ -1,0 +1,148 @@
+---
+---
+
+<details class="palette-picker">
+    <summary aria-label="Choose accent colour" title="Choose accent colour">
+        <span class="palette-swatch" aria-hidden="true"></span>
+    </summary>
+    <div class="palette-menu" role="group" aria-label="Accent colours">
+        <button type="button" class="palette-option" data-palette="default" aria-label="Luna accent (Default)" title="(Default) Luna Blue accent">
+            <span class="palette-swatch palette-swatch-default" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="palette-option" data-palette="forest" aria-label="Forest accent" title="Forest accent">
+            <span class="palette-swatch palette-swatch-forest" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="palette-option" data-palette="sunset" aria-label="Sunset accent" title="Sunset accent">
+            <span class="palette-swatch palette-swatch-sunset" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="palette-option" data-palette="silver" aria-label="Silver accent" title="Silver accent">
+            <span class="palette-swatch palette-swatch-silver" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="palette-option" data-palette="retro" aria-label="Retro accent" title="Retro accent">
+            <span class="palette-swatch palette-swatch-retro" aria-hidden="true"></span>
+        </button>
+        <hr>
+        <button type="button" class="palette-option" data-palette="high-contrast" aria-label="High contrast accent" title="High contrast accent">
+            <span class="palette-swatch palette-swatch-high-contrast" aria-hidden="true"></span>
+        </button>
+    </div>
+</details>
+
+<style>
+    .palette-picker {
+        position: relative;
+    }
+
+    .palette-picker summary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 2px dashed transparent;
+        border-radius: 2px;
+        cursor: pointer;
+        list-style: none;
+        transition: border-color 160ms ease, background-color 160ms ease;
+    }
+
+    .palette-picker summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .palette-picker summary:hover,
+    .palette-picker[open] summary {
+        border-color: var(--colour-accent);
+        background-color: var(--colour-hover-wash);
+    }
+
+    .palette-menu {
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + 8px);
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+        border: 2px solid var(--colour-border-dark);
+        border-radius: 2px;
+        background-color: var(--colour-bg-pane-left);
+        box-shadow: 4px 4px 0 var(--colour-shadow);
+    }
+
+    .palette-option {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 3px;
+        border: 2px dashed transparent;
+        border-radius: 2px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .palette-option:hover,
+    .palette-option:focus-visible,
+    .palette-option.is-selected {
+        border-color: var(--colour-accent);
+    }
+
+    .palette-swatch {
+        display: block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: var(--colour-accent);
+    }
+
+    .palette-swatch-default {
+        background-color: #002bff;
+    }
+
+    .palette-swatch-forest {
+        background-color: #2f7d32;
+    }
+
+    .palette-swatch-sunset {
+        background-color: #d94f30;
+    }
+
+    .palette-swatch-silver {
+        background-color: #687384;
+    }
+
+    .palette-swatch-retro {
+        background: linear-gradient(135deg, #003399 0 25%, #008080 25% 50%, #800080 50% 75%, #d4d0c8 75%);
+    }
+
+    .palette-swatch-high-contrast {
+        background: linear-gradient(90deg, #fff 50%, #000 50%)
+    }
+</style>
+
+<script is:inline>
+    const paletteOptions = document.querySelectorAll('.palette-option');
+    const savedPalette = localStorage?.getItem('palette');
+    const palette = ['default', 'forest', 'sunset', 'silver', 'retro', 'high-contrast'].includes(savedPalette ?? '')
+        ? savedPalette
+        : 'default';
+
+    const applyPalette = (selectedPalette) => {
+        document.documentElement.dataset.palette = selectedPalette;
+        paletteOptions.forEach((option) => {
+            option.classList.toggle('is-selected', option.dataset.palette === selectedPalette);
+        });
+    };
+
+    applyPalette(palette);
+
+    paletteOptions.forEach((option) => {
+        option.addEventListener('click', () => {
+            const selectedPalette = option.dataset.palette;
+            localStorage.setItem('palette', selectedPalette);
+            applyPalette(selectedPalette);
+            option.closest('details')?.removeAttribute('open');
+        });
+    });
+</script>

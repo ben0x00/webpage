@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro'
+import AccentPalette from '../components/AccentPalette.astro'
 
 const currentPath = Astro.url.pathname;
 
@@ -50,6 +51,7 @@ const isActive = (href: string) =>
             </ul>
             
             <ThemeToggle/>
+            <AccentPalette />
             
         </nav>
 </footer>
