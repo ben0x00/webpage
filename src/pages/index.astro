@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import TownSquare from '../components/TownSquare.astro'
+import InfoCard from '../components/InfoCard.astro'
+import UpdatesList from '../components/UpdatesList.astro'
+
+const updates = [
+{
+date: ' 2026',
+tag: 'Website',
+message: 'Created new webpage.',
+},
+];
+---
+<BaseLayout
+    titleText="Welcome"
+    description="Personal site of Ben Toon — writing, projects, and experiments."
+>
+    <div class="page-sections">
+        <p class="body intro">
+            Welcome to my redesigned website. It's heavily work in progress at the moment, so
+            expect things to be broken for the time being. Eventually, blog posts and projects
+            will be showcased here.
+        </p>
+
+        <hr class="divider-thin" />
+
+        <section>
+            <h2 class="section-label">Elsewhere</h2>
+            <div class="info-cards-grid">
+                <InfoCard label="GitHub" content="View code and side projects" link="https://github.com/ben0x00" />
+                <InfoCard label="Email" content="ben@ben0x00.com" link="mailto:ben@ben0x00.com" />
+                <InfoCard label="Projects" content="Go to my projects page" link="/projects" />
+                <InfoCard label="More Links" content="View all links..." link="/links" />
+            </div>
+        </section>
+
+        <hr class="divider-thin" />
+
+        <section>
+            <UpdatesList title="Recent updates" updates={updates} />
+        </section>
+
+        
+
+        <TownSquare />
+    </div>
+</BaseLayout>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/variables';
+
+    .page-sections {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, 2xl);
+    }
+
+    .intro {
+        margin: 0;
+    }
+
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+        gap: map.get(variables.$spacing, md);
+    }
+</style>

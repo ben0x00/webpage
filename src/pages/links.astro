@@ -1,0 +1,62 @@
+
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout titleText="More Links" description="Some links from around the web worth sharing.">
+    <ul class="post-list">
+            <li>
+                <a class="item-link" href="https://makingsoftware.com/">
+                    <span class="link-title">Making Software</span>
+                    <span class="link-description">An excellently designed blog about software development and programmin, that inspired a lot of this website.</span>
+                </a>
+
+                <a class="item-link">
+                    <span class="link-description">Check out these other cool portfolios (changes every 30s)</span>
+                    <iframe width="180" height="180" style="border:dashed; margin: 20px auto 20px auto" src="https://nvlk.dimden.dev/" name="neolink"></iframe>
+                </a>
+            </li>
+    </ul>
+</BaseLayout>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .link-title {
+        @extend .subtitle;
+        font-size: var(--step-2);
+    }
+
+    .item-link {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0 map.get(variables.$spacing, md);
+        align-items: baseline;
+        padding: map.get(variables.$spacing, md) 0;
+        border-bottom: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+        text-decoration: none;
+        color: inherit;
+    }
+
+
+    .item-link:hover .link-title {
+        color: map.get(variables.$colours, accent);
+    }
+
+    .link-description {
+        grid-column: 1 / -1;
+        font-family: map.get(typography.$fonts, body);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, text-secondary);
+        line-height: 1.5;
+        margin-top: map.get(variables.$spacing, xs);
+    }
+</style>

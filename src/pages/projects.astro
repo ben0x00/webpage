@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+    titleText="Projects"
+    description="A collection of experiments and production work."
+>
+    <section class="project-notice">
+        <p class="body">
+            This section is work in progress. More refined projects will be added here, for now check out <a href="https://github.com/ben0x00">my GitHub</a>.
+        </p>
+
+        <p class="project-cta">
+            Check back soon!
+        </p>
+    </section>
+</BaseLayout>
+
+<style lang="scss">
+    @use 'sass:map';
+    @use '../styles/typography';
+    @use '../styles/variables';
+
+    .project-notice {
+        display: flex;
+        flex-direction: column;
+        gap: map.get(variables.$spacing, lg);
+    }
+
+    .project-cta {
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: map.get(variables.$spacing, md);
+    }
+</style>

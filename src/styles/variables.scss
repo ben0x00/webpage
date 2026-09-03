@@ -1,0 +1,85 @@
+// Design tokens.
+//
+// Colours are CSS custom properties so `prefers-color-scheme` can swap them at
+// runtime. The SCSS map below only forwards `var(--...)` references, which keeps
+// every existing `map.get(variables.$colours, x)` call site working unchanged.
+
+:root {
+  color-scheme: light dark;
+
+  --colour-bg-main: rgb(251, 251, 251);
+  --colour-bg-pane-left: #f4f2ee;
+  --colour-bg-pane-right: #f8f9fc;
+  --colour-text-primary: #1a1410;
+  --colour-text-secondary: #3d3228;
+  --colour-text-muted: #6b6152;
+  --colour-accent: #002bff;
+  --colour-secondary: #0300a8;
+  --colour-tertiary: #6a0ad6;
+  --colour-border-dark: #1a1410;
+  --colour-divider-light: rgba(26, 20, 16, 0.14);
+  --colour-card-bg: #edeae5;
+  --colour-shadow: rgba(26, 20, 16, 0.22);
+  --colour-hover-wash: rgba(26, 20, 16, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colour-bg-main: #0a0a0a;
+    --colour-bg-pane-left: #121210;
+    --colour-bg-pane-right: #1c1d1a;
+    --colour-text-primary: #f1eee8;
+    --colour-text-secondary: #e2ddd3;
+    --colour-text-muted: #afada8;
+    --colour-accent: #74aeff;
+    --colour-secondary: #2c6bff;
+    --colour-tertiary: #c39bff;
+    --colour-border-dark: #3f3c36;
+    --colour-divider-light: rgba(242, 238, 230, 0.18);
+    --colour-card-bg: #24231f;
+    --colour-shadow: rgba(0, 0, 0, 0.55);
+    --colour-hover-wash: rgba(242, 238, 230, 0.08);
+  }
+}
+
+$colours: (
+  bg-main: var(--colour-bg-main),
+  bg-pane-left: var(--colour-bg-pane-left),
+  bg-pane-right: var(--colour-bg-pane-right),
+  text-primary: var(--colour-text-primary),
+  text-secondary: var(--colour-text-secondary),
+  text-muted: var(--colour-text-muted),
+  accent: var(--colour-accent),
+  secondary: var(--colour-secondary),
+  tertiary: var(--colour-tertiary),
+  border-dark: var(--colour-border-dark),
+  divider-light: var(--colour-divider-light),
+  card-bg: var(--colour-card-bg),
+  shadow: var(--colour-shadow),
+  hover-wash: var(--colour-hover-wash),
+);
+
+$spacing: (
+  2xs: 2px,
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+  2xl: 48px,
+  3xl: 72px,
+);
+
+$radius: (
+  sm: 2px,
+  md: 6px,
+);
+
+$border: (
+  hairline: 1px,
+  regular: 2px,
+);
+
+// Hard offset shadow is the retro signature; reserved for cards and raised chrome.
+$shadow-offset: 4px;
+$shadow-offset-hover: 6px;

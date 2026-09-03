@@ -1,0 +1,220 @@
+---
+// Global styles
+import '../styles/style.scss';
+import '../styles/variables.scss';
+import '../styles/typography.scss';
+
+import Sidebar from '../components/Sidebar.astro';
+import HeadingBox from '../components/HeadingBox.astro';
+import NavigationBar from '../components/NavigationBar.astro';
+
+const { titleText, description, frontmatter } = Astro.props;
+const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
+const isMarkdownPost = Boolean(frontmatter);
+
+// Use static paths for favicons to ensure correct rendering
+const faviconSvgSrc = '/favicon.svg';
+const faviconPngSrc = '/favicon.png';
+
+const siteName = 'Ben Toon';
+const pageTitle = heading === siteName ? siteName : `${heading} : ${siteName}`;
+const pageDescription =
+    description ?? frontmatter?.description ?? 'Personal site of Ben Toon — writing, projects, and experiments.';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription}>
+    <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#181917" media="(prefers-color-scheme: dark)">
+    
+    <link rel="icon" href={faviconSvgSrc} type="image/svg+xml">
+    <link rel="icon" href={faviconPngSrc} type="image/png">
+    <link rel="shortcut icon" href={faviconPngSrc} type="image/png">
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site ?? Astro.url).href}>
+    <meta property="og:type" content={isMarkdownPost ? 'article' : 'website'}>
+    <meta property="og:title" content={pageTitle}>
+    <meta property="og:description" content={pageDescription}>
+</head>
+
+<body>
+    <main id="app-container">
+        <section id="page-main">
+            <Sidebar />
+
+            <section class="content-right">
+                <div class="content-right-container">
+
+                    <HeadingBox
+                        heading={heading}
+                        frontmatter={frontmatter}
+                    />
+
+                    {isMarkdownPost ? (
+                        <article class="markdown-post">
+                            <slot />
+                        </article>
+                    ) : (
+                        <slot />
+                        <a href="javascript:history.back()" class="subtitle"> <- Go Back </a>
+                    )}
+
+
+                </div>
+            </section>
+        </section>
+        
+        <NavigationBar />
+
+    </main>
+
+</body>
+
+</html>
+
+<style lang="scss">
+@use 'sass:map';
+@use '../styles/typography';
+@use '../styles/variables';
+
+.markdown-post {
+    font-family: map.get(typography.$fonts, body);
+    font-size: var(--step-0);
+    color: map.get(variables.$colours, text-primary);
+    line-height: 1.7;
+}
+
+.markdown-post :global(h1),
+.markdown-post :global(h2),
+.markdown-post :global(h3),
+.markdown-post :global(h4),
+.markdown-post :global(h5),
+.markdown-post :global(h6) {
+    font-family: map.get(typography.$fonts, heading);
+    color: map.get(variables.$colours, text-primary);
+    font-weight: normal;
+    line-height: 1.25;
+    margin: map.get(variables.$spacing, xl) 0 map.get(variables.$spacing, sm);
+}
+
+.markdown-post :global(h1) { font-size: var(--step-3); }
+.markdown-post :global(h2) { font-size: var(--step-2); }
+.markdown-post :global(h3) { font-size: var(--step-1); }
+
+// h4-h6 stop scaling and shift to mono, so deep nesting reads as labels.
+.markdown-post :global(h4),
+.markdown-post :global(h5),
+.markdown-post :global(h6) {
+    font-family: map.get(typography.$fonts, mono);
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: map.get(variables.$colours, text-muted);
+}
+
+.markdown-post :global(> :first-child) {
+    margin-top: 0;
+}
+
+.markdown-post :global(p) {
+    margin: 0 0 map.get(variables.$spacing, md);
+}
+
+.markdown-post :global(ul),
+.markdown-post :global(ol) {
+    margin: 0 0 map.get(variables.$spacing, md);
+    padding-left: map.get(variables.$spacing, lg);
+}
+
+.markdown-post :global(li) {
+    margin-bottom: map.get(variables.$spacing, xs);
+}
+
+.markdown-post :global(li::marker) {
+    color: map.get(variables.$colours, text-muted);
+}
+
+.markdown-post :global(blockquote) {
+    margin: map.get(variables.$spacing, lg) 0;
+    padding-left: map.get(variables.$spacing, md);
+    border-left: map.get(variables.$border, regular) solid map.get(variables.$colours, accent);
+    color: map.get(variables.$colours, text-secondary);
+    font-style: italic;
+}
+
+.markdown-post :global(blockquote p:last-child) {
+    margin-bottom: 0;
+}
+
+.markdown-post :global(hr) {
+    border: 0;
+    border-top: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    margin: map.get(variables.$spacing, xl) 0;
+}
+
+.markdown-post :global(a) {
+    color: map.get(variables.$colours, accent);
+    text-underline-offset: 0.18em;
+    text-decoration: underline dashed;
+    transition: text-decoration-style 160ms ease;
+}
+
+.markdown-post :global(a:hover) {
+    text-decoration-style: solid;
+}
+
+.markdown-post :global(a:visited) {
+    color: map.get(variables.$colours, tertiary);
+}
+
+.markdown-post :global(code) {
+    font-family: map.get(typography.$fonts, code);
+    font-size: 0.9em;
+    color: map.get(variables.$colours, secondary);
+    background: map.get(variables.$colours, card-bg);
+    padding: 0.1em 0.35em;
+    border-radius: map.get(variables.$radius, sm);
+}
+
+.markdown-post :global(pre) {
+    overflow-x: auto;
+    padding: map.get(variables.$spacing, md);
+    margin: 0 0 map.get(variables.$spacing, md);
+    background: map.get(variables.$colours, card-bg);
+    border: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+    border-radius: map.get(variables.$radius, md);
+}
+
+.markdown-post :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.markdown-post :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: map.get(variables.$radius, md);
+    border: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+}
+
+.markdown-post :global(strong) {
+    font-weight: 700;
+}
+
+/* Pin the left sidebar so it stays visible while scrolling */
+.content-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    /* prevent the sidebar from shrinking */
+    flex-shrink: 0;
+}
+</style>

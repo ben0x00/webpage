@@ -1,0 +1,83 @@
+---
+const {
+    title = 'Recent Updates',
+    updates = [
+        { date: 'Apr 29 2026', tag: 'Website', message: 'Redesign launch???' },
+    ],
+} = Astro.props;
+---
+
+<section class="profile-updates">
+    <h2 class="section-label">{title}</h2>
+    <div class="updates-list">
+        {updates.map((update: { date: string; tag: string; message: string }) => (
+            <div class="update-item">
+                <span class="update-date">{update.date}</span>
+                <span class="update-tag">{update.tag}</span>
+                <span class="update-message">{update.message}</span>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style lang="scss">
+@use 'sass:map';
+@use '../styles/typography';
+@use '../styles/variables';
+
+.updates-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-item {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: map.get(variables.$spacing, sm) map.get(variables.$spacing, md);
+    padding: map.get(variables.$spacing, sm) 0;
+    border-bottom: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+}
+
+.update-item:last-child {
+    border-bottom: 0;
+}
+
+.update-date {
+    font-family: map.get(typography.$fonts, mono);
+    font-size: var(--step--1);
+    color: map.get(variables.$colours, text-muted);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+}
+
+.update-tag {
+    justify-self: start;
+    border: map.get(variables.$border, hairline) solid map.get(variables.$colours, accent);
+    border-radius: map.get(variables.$radius, sm);
+    padding: 0 map.get(variables.$spacing, xs);
+    font-family: map.get(typography.$fonts, mono);
+    font-size: var(--step--1);
+    color: map.get(variables.$colours, accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.update-message {
+    font-family: map.get(typography.$fonts, body);
+    font-size: var(--step-0);
+    color: map.get(variables.$colours, text-primary);
+    line-height: 1.45;
+}
+
+@media (max-width: 30rem) {
+    .update-item {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .update-message {
+        grid-column: 1 / -1;
+    }
+}
+</style>
