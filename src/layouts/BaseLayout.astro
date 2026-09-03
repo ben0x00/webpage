@@ -10,7 +10,8 @@ import NavigationBar from '../components/NavigationBar.astro';
 
 const { titleText, description, frontmatter } = Astro.props;
 const heading = titleText ?? frontmatter?.title ?? "Ben's Site";
-const isMarkdownPost = Boolean(frontmatter);
+const isMarkdownPost = Astro.url.pathname.startsWith('/posts/');
+const isProjectPage = Astro.url.pathname.startsWith('/projects/');
 
 const faviconSrc = '/favicon.png';
 
@@ -52,12 +53,21 @@ const pageDescription =
                     />
 
                     {isMarkdownPost ? (
-                        <article class="markdown-post">
-                            <slot />
-                        </article>
+                        <>
+                            <article class="markdown-post">
+                                <slot />
+                            </article>
+                            {isProjectPage && (
+                                <a href="/projects" class="back-link subtitle">&lt;- Back to Projects</a>
+                            )}
+                            {isMarkdownPost && (
+                                <a href="/posts" class="back-link subtitle">&lt;- Back to Posts</a>
+                            )}
+                            
+                        </>
                     ) : (
                         <slot />
-                        <a href="javascript:history.back()" class="subtitle"> <- Go Back </a>
+                        <a href="javascript:history.back()" class="subtitle"> &lt;- Go Back </a>
                     )}
 
 
@@ -83,6 +93,18 @@ const pageDescription =
     font-size: var(--step-0);
     color: map.get(variables.$colours, text-primary);
     line-height: 1.7;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: map.get(variables.$spacing, lg);
+    color: map.get(variables.$colours, accent);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
 }
 
 .markdown-post :global(h1),

@@ -11,8 +11,9 @@
 // Divider elements - reusable separators
 .divider-thin {
   height: map.get(variables.$border, hairline);
+  border-color: map.get(variables.$colours, divider-light);
   color: map.get(variables.$colours, divider-light);
-  margin: map.get(variables.$spacing, xs) 0;
+  margin: map.get(variables.$spacing, sm) 0;
 }
 
 .divider-thin-inner {

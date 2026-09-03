@@ -1,11 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = Object.values(
+    import.meta.glob('./projects/*.md', { eager: true }),
+) as Array<{ url?: string; frontmatter: Record<string, string> }>;
 ---
 
 <BaseLayout
     titleText="Projects"
     description="A collection of experiments and production work."
 >
+    {projects.length > 0 && (
+        <ul class="project-list">
+            {projects.map((project) => (
+                <li>
+                    <a class="project-link" href={project.url}>
+                        <span class="project-title">{project.frontmatter.title}</span>
+                        {project.frontmatter.pubDate && (
+                            <span class="project-date">{project.frontmatter.pubDate}</span>
+                        )}
+                        {project.frontmatter.description && (
+                            <span class="project-description">{project.frontmatter.description}</span>
+                        )}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    )}
+
     <section class="project-notice">
         <p class="body">
             This section is work in progress. More refined projects will be added here, for now check out <a href="https://github.com/ben0x00">my GitHub</a>.
@@ -21,6 +43,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     @use 'sass:map';
     @use '../styles/typography';
     @use '../styles/variables';
+
+    .project-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .project-link {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0 map.get(variables.$spacing, md);
+        align-items: baseline;
+        padding: map.get(variables.$spacing, md) 0;
+        border-bottom: map.get(variables.$border, hairline) solid map.get(variables.$colours, divider-light);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .project-title {
+        @extend .subtitle;
+        font-size: var(--step-2);
+    }
+
+    .project-link:hover .project-title {
+        color: map.get(variables.$colours, accent);
+    }
+
+    .project-date {
+        font-family: map.get(typography.$fonts, mono);
+        font-size: var(--step--1);
+        color: map.get(variables.$colours, text-muted);
+        white-space: nowrap;
+    }
+
+    .project-description {
+        grid-column: 1 / -1;
+        font-family: map.get(typography.$fonts, body);
+        font-size: var(--step-0);
+        color: map.get(variables.$colours, text-secondary);
+        line-height: 1.5;
+        margin-top: map.get(variables.$spacing, xs);
+    }
 
     .project-notice {
         display: flex;
