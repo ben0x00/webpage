@@ -4,9 +4,10 @@
 // runtime. The SCSS map below only forwards `var(--...)` references, which keeps
 // every existing `map.get(variables.$colours, x)` call site working unchanged.
 
+
+// Default light colours
 :root {
   color-scheme: light dark;
-
   --colour-bg-main: rgb(251, 251, 251);
   --colour-bg-pane-left: #f4f2ee;
   --colour-bg-pane-right: #f8f9fc;
@@ -23,8 +24,9 @@
   --colour-hover-wash: rgba(26, 20, 16, 0.06);
 }
 
+// System dark mode
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
     --colour-bg-main: #0a0a0a;
     --colour-bg-pane-left: #121210;
     --colour-bg-pane-right: #1c1d1a;
@@ -40,6 +42,41 @@
     --colour-shadow: rgba(0, 0, 0, 0.55);
     --colour-hover-wash: rgba(242, 238, 230, 0.08);
   }
+}
+// User overide dark mode
+:root.dark {
+  --colour-bg-main: #0a0a0a;
+    --colour-bg-pane-left: #121210;
+    --colour-bg-pane-right: #1c1d1a;
+    --colour-text-primary: #f1eee8;
+    --colour-text-secondary: #e2ddd3;
+    --colour-text-muted: #afada8;
+    --colour-accent: #74aeff;
+    --colour-secondary: #2c6bff;
+    --colour-tertiary: #c39bff;
+    --colour-border-dark: #3f3c36;
+    --colour-divider-light: rgba(242, 238, 230, 0.18);
+    --colour-card-bg: #24231f;
+    --colour-shadow: rgba(0, 0, 0, 0.55);
+    --colour-hover-wash: rgba(242, 238, 230, 0.08);
+}
+
+// User override light mode
+:root.light {
+  --colour-bg-main: rgb(251, 251, 251);
+  --colour-bg-pane-left: #f4f2ee;
+  --colour-bg-pane-right: #f8f9fc;
+  --colour-text-primary: #1a1410;
+  --colour-text-secondary: #3d3228;
+  --colour-text-muted: #6b6152;
+  --colour-accent: #002bff;
+  --colour-secondary: #0300a8;
+  --colour-tertiary: #6a0ad6;
+  --colour-border-dark: #1a1410;
+  --colour-divider-light: rgba(26, 20, 16, 0.14);
+  --colour-card-bg: #edeae5;
+  --colour-shadow: rgba(26, 20, 16, 0.22);
+  --colour-hover-wash: rgba(26, 20, 16, 0.06);
 }
 
 $colours: (
