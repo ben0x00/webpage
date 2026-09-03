@@ -167,6 +167,7 @@ body {
   .content-left {
     grid-column: 1;
     grid-row: 1;
+    height: fit-content;
     overflow-y: visible;
     border-right: 0;
     border-bottom: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
@@ -211,3 +212,4 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
