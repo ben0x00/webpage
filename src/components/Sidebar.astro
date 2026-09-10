@@ -7,7 +7,7 @@ const {
 } = Astro.props;
 ---
 
-<aside class="content-left">
+<aside id="content-left" class="content-left" aria-expanded="true">
     <div class="profile-header">
         <div class="profile-name">
             <a class="name-line1" style="color: var(--colour-accent)" href="/">
@@ -17,7 +17,6 @@ const {
                 {name.last}
             </a>
         </div>
-
         <div class="profile-tagline">
             {taglineTexts.map((tagline: string, i: number) => (
                 <p class="tagline-text" data-index={i}>{tagline}</p>

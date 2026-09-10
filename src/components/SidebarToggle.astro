@@ -1,0 +1,38 @@
+---
+---
+
+<button
+    aria-expanded="true"
+    aria-controls="content-left"
+    aria-label="Collapse sidebar"
+    class="menu"
+>
+    <span class="menu-icon" aria-hidden="true">−</span>
+</button>
+
+<script>
+    const button = document.querySelector('button.menu');
+    const sidebar = document.querySelector('.content-left');
+
+    button?.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const newState = !isExpanded;
+        
+        button.setAttribute('aria-expanded', String(newState));
+        button.setAttribute('aria-label', `${newState ? 'Collapse' : 'Expand'} sidebar`);
+        sidebar?.setAttribute('aria-expanded', String(newState));
+    });
+</script>
+
+<style lang="scss">
+    .menu-icon {
+        display: block;
+        font-size: 1.35rem;
+        line-height: 1;
+        transition: transform 220ms ease;
+    }
+
+    .menu[aria-expanded="false"] .menu-icon {
+        transform: rotate(90deg);
+    }
+</style>

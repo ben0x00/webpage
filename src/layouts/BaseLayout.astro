@@ -5,6 +5,7 @@ import '../styles/variables.scss';
 import '../styles/typography.scss';
 
 import Sidebar from '../components/Sidebar.astro';
+import SidebarToggle from '../components/SidebarToggle.astro';
 import HeadingBox from '../components/HeadingBox.astro';
 import NavigationBar from '../components/NavigationBar.astro';
 
@@ -42,6 +43,7 @@ const pageDescription =
 <body>
     <main id="app-container">
         <section id="page-main">
+            <SidebarToggle />
             <Sidebar />
 
             <section class="content-right">

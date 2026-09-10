@@ -1,8 +1,6 @@
-@use 'sass:map';
-@use 'typography';
-@use 'variables';
-
-
+@use "sass:map";
+@use "typography";
+@use "variables";
 
 // ===================================
 // 1: COMPONENT STYLES
@@ -62,12 +60,12 @@
   --muted: var(--ink);
 }
 
-#townsquare-root#townsquare-root[data-townsquare-theme='dark'] {
+#townsquare-root#townsquare-root[data-townsquare-theme="dark"] {
   @include townsquare-dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  #townsquare-root#townsquare-root[data-townsquare-theme='auto'] {
+  #townsquare-root#townsquare-root[data-townsquare-theme="auto"] {
     @include townsquare-dark;
   }
 }
@@ -124,20 +122,108 @@ body {
   display: grid;
   grid-template-columns: clamp(15rem, 24vw, 19rem) minmax(0, 1fr);
   min-height: 0;
+  transition: grid-template-columns 320ms ease;
 }
 
 .content-left {
   grid-column: 1;
-  display: sticky;
+  display: flex;
   flex-direction: column;
   gap: map.get(variables.$spacing, lg);
   padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
   overflow-y: auto;
-  border-right: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
+  border-right: map.get(variables.$border, regular) solid
+    map.get(variables.$colours, border-dark);
   background-color: map.get(variables.$colours, bg-pane-left);
   min-height: 0;
   min-width: 0;
   z-index: 1;
+  transition: opacity 240ms ease, max-height 320ms ease, padding 320ms ease,
+    gap 320ms ease, border-color 320ms ease;
+}
+
+button.menu {
+  position: fixed;
+  top: map.get(variables.$spacing, md);
+  left: clamp(15rem, 24vw, 19rem);
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  transform: translateX(-50%);
+  z-index: 3;
+  border: map.get(variables.$border, regular) solid
+    map.get(variables.$colours, border-dark);
+  border-radius: map.get(variables.$radius, sm);
+  background: map.get(variables.$colours, bg-main);
+  color: map.get(variables.$colours, accent);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.12);
+  font-family: map.get(typography.$fonts, mono);
+  font-size: var(--step-0);
+  line-height: 1;
+  cursor: pointer;
+  transition: left 320ms ease, background-color 160ms ease, color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+button.menu:hover {
+  background: map.get(variables.$colours, accent);
+  color: map.get(variables.$colours, bg-main);
+  box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.18);
+}
+
+button.menu[aria-expanded="false"] {
+  left: map.get(variables.$spacing, md);
+  transform: none;
+}
+
+button.menu:focus-visible {
+  outline-offset: 4px;
+}
+
+.content-left[aria-expanded="false"] {
+  opacity: 0;
+  padding-inline: 0;
+  border-right-color: transparent;
+  pointer-events: none;
+}
+
+.content-left[aria-expanded="false"] > * {
+  visibility: hidden;
+}
+
+.content-left[aria-expanded="true"] {
+  opacity: 1;
+  max-height: 100vh;
+}
+
+@media (min-width: 48.01rem) {
+  #page-main:has(.content-left[aria-expanded="false"]) {
+    grid-template-columns: 0 minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 48rem) {
+  button.menu {
+    top: map.get(variables.$spacing, md);
+    right: map.get(variables.$spacing, md);
+    left: auto;
+    transform: none;
+  }
+
+  button.menu[aria-expanded="false"] {
+    left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-main,
+  .content-left,
+  button.menu,
+  .menu-icon {
+    transition: none;
+  }
 }
 
 .content-right {
@@ -171,7 +257,8 @@ body {
     height: fit-content;
     overflow-y: visible;
     border-right: 0;
-    border-bottom: map.get(variables.$border, regular) solid map.get(variables.$colours, border-dark);
+    border-bottom: map.get(variables.$border, regular) solid
+      map.get(variables.$colours, border-dark);
     padding: map.get(variables.$spacing, lg);
     gap: map.get(variables.$spacing, md);
   }
@@ -182,6 +269,14 @@ body {
     overflow-y: visible;
     padding: map.get(variables.$spacing, xl) map.get(variables.$spacing, lg);
   }
+
+  .content-left[aria-expanded="false"] {
+    max-height: 0;
+    padding-block: 0;
+    gap: 0;
+    border-bottom-color: transparent;
+  }
+
 }
 
 .eyebrow {
@@ -198,7 +293,8 @@ body {
 // ===================================
 
 :focus-visible {
-  outline: map.get(variables.$border, regular) solid map.get(variables.$colours, accent);
+  outline: map.get(variables.$border, regular) solid
+    map.get(variables.$colours, accent);
   outline-offset: 3px;
   border-radius: map.get(variables.$radius, sm);
 }
@@ -213,4 +309,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-
