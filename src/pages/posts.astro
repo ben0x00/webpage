@@ -17,7 +17,10 @@ const sorted = posts.sort(
 );
 ---
 
-<BaseLayout titleText="Posts" description="Writing by Ben Toon.">
+<BaseLayout
+    titleText="Posts"
+    description="Technical writing and notes on software, computing, technology, and related ideas."
+>
     {sorted.length === 0 ? (
         <p class="body">No posts yet — check back soon.</p>
     ) : (
